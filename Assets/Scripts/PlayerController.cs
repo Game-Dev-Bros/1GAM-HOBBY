@@ -89,6 +89,6 @@ public class PlayerController : MonoBehaviour
         animationTime = clip.normalizedTime;
         transform.position = Vector2.Lerp(previousPosition, nextPosition, animationTime);
 
-        GetComponent<SpriteRenderer>().sortingOrder = (int) -transform.position.y;
+        GetComponent<SpriteRenderer>().sortingOrder = (int) -transform.position.y - 1;
     }
 }
