@@ -7,11 +7,10 @@ public class PlayerController : MonoBehaviour
     private bool up, down, left, right;
     private bool walking;
 
-    private Vector2 previousPosition, nextPosition;
-
     private float animationTime;
 
-    public int walkingSpeed = 2;
+    private Vector3 walkingDirection;
+    public int walkingSpeed;
 
     void Awake()
     {
@@ -20,19 +19,21 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        walking = false;
-
         ProcessInput();
         UpdatePlayer();
     }
 
     void ProcessInput()
     {
+        walking = false;
+        walkingDirection = Vector2.zero;
+
         if(Input.GetButton("MoveUp"))
         {
             up = true;
             down = left = right = false;
             walking = true;
+            walkingDirection = Vector2.up;
         }
 
         if(Input.GetButton("MoveDown"))
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
             down = true;
             up = left = right = false;
             walking = true;
+            walkingDirection = Vector2.down;
         }
 
         if(Input.GetButton("MoveLeft"))
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour
             left = true;
             up = down = right = false;
             walking = true;
+            walkingDirection = Vector2.left;
         }
 
         if(Input.GetButton("MoveRight"))
@@ -54,67 +57,19 @@ public class PlayerController : MonoBehaviour
             right = true;
             up = down = left = false;
             walking = true;
+            walkingDirection = Vector2.right;
         }
-        
+    }
+
+    void UpdatePlayer()
+    {
         animator.SetBool("up", up);
         animator.SetBool("down", down);
         animator.SetBool("left", left);
         animator.SetBool("right", right);
         animator.SetBool("walking", walking);
-    }
 
-
-    void FixedUpdate()
-    {
-        //if(transform.position.x < nextPosition.x)
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.position += new Vector3(0, 0.1f * walkingSpeed, 0);
-        }
-        else if (Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.position += new Vector3(0, -0.1f * walkingSpeed, 0);
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.position += new Vector3(-0.1f * walkingSpeed, 0, 0);
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.position += new Vector3(0.1f * walkingSpeed, 0, 0);
-        }
-        //transform.position += new Vector3(0.01f, 0, 0);
-    }
-
-
-    void UpdatePlayer()
-    {
-        //AnimatorStateInfo clip = animator.GetCurrentAnimatorStateInfo(0);
-
-        //if(clip.normalizedTime < animationTime)
-        //{
-        //    previousPosition = nextPosition;
-        //}
-        //else if(clip.IsName("Walk Up"))
-        //{
-        //    nextPosition = previousPosition + Vector2.up;
-        //}
-        //else if(clip.IsName("Walk Down"))
-        //{
-        //    nextPosition = previousPosition + Vector2.down;
-        //}
-        //else if(clip.IsName("Walk Left"))
-        //{
-        //    nextPosition = previousPosition + Vector2.left;
-        //}
-        //else if(clip.IsName("Walk Right"))
-        //{
-        //    nextPosition = previousPosition + Vector2.right;
-        //}
-
-        //animationTime = clip.normalizedTime;
-        //transform.position = Vector2.Lerp(previousPosition, nextPosition, animationTime);
-
+        transform.position += walkingDirection * walkingSpeed * Time.deltaTime;
         GetComponent<SpriteRenderer>().sortingOrder = (int) -transform.position.y;
     }
 }
