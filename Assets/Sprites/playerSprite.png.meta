@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1161b9ec8ee79e44b981a61dc705bd0f
-timeCreated: 1451860682
+timeCreated: 1452003740
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -56,7 +56,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 8
+  spritePixelsToUnits: 10
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
@@ -69,8 +69,8 @@ TextureImporter:
         y: 61
         width: 12
         height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: idle_down
@@ -80,8 +80,8 @@ TextureImporter:
         y: 61
         width: 12
         height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: walk_2_down
@@ -91,8 +91,8 @@ TextureImporter:
         y: 61
         width: 12
         height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: walk_1_left
@@ -102,8 +102,8 @@ TextureImporter:
         y: 40
         width: 12
         height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: idle_left
@@ -113,8 +113,8 @@ TextureImporter:
         y: 40
         width: 12
         height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: walk_2_left
@@ -124,8 +124,8 @@ TextureImporter:
         y: 40
         width: 12
         height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: walk_1_right
@@ -135,8 +135,8 @@ TextureImporter:
         y: 20
         width: 12
         height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: idle_right
@@ -146,8 +146,8 @@ TextureImporter:
         y: 20
         width: 12
         height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: walk_2_right
@@ -157,8 +157,8 @@ TextureImporter:
         y: 20
         width: 12
         height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: walk_1_up
@@ -168,8 +168,8 @@ TextureImporter:
         y: 0
         width: 12
         height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: idle_up
@@ -179,8 +179,8 @@ TextureImporter:
         y: 0
         width: 12
         height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: walk_2_up
@@ -190,8 +190,8 @@ TextureImporter:
         y: 0
         width: 12
         height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     outline: []
