@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
 
     private float animationTime;
 
+    public float walkingSpeed = 1;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -61,15 +63,39 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("walking", walking);
     }
 
+
+    void FixedUpdate()
+    {
+        //if(transform.position.x < nextPosition.x)
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            transform.position += new Vector3(0, 0.1f * walkingSpeed, 0);
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            transform.position += new Vector3(0, -0.1f * walkingSpeed, 0);
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.position += new Vector3(-0.1f * walkingSpeed, 0, 0);
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.position += new Vector3(0.1f * walkingSpeed, 0, 0);
+        }
+        //transform.position += new Vector3(0.01f, 0, 0);
+    }
+
     void UpdatePlayer()
     {
+
         AnimatorStateInfo clip = animator.GetCurrentAnimatorStateInfo(0);
 
-        if(clip.normalizedTime < animationTime)
+        if (clip.normalizedTime < animationTime)
         {
             previousPosition = nextPosition;
         }
-        else if(clip.IsName("Walk Up"))
+        if(clip.IsName("Walk Up"))
         {
             nextPosition = previousPosition + Vector2.up;
         }
@@ -87,8 +113,8 @@ public class PlayerController : MonoBehaviour
         }
 
         animationTime = clip.normalizedTime;
-        transform.position = Vector2.Lerp(previousPosition, nextPosition, animationTime);
+        //transform.position = Vector2.Lerp(previousPosition, nextPosition, animationTime);
 
-        GetComponent<SpriteRenderer>().sortingOrder = (int) -transform.position.y;
+        GetComponent<SpriteRenderer>().sortingOrder = (int) -transform.position.y-1;
     }
 }
