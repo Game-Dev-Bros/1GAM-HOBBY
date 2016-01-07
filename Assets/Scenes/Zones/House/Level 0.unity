@@ -41073,6 +41073,22 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1 &2059774027 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 164802, guid: bfe5f9e85b0fcdb4d83262278b49b8a8, type: 2}
+  m_PrefabInternal: {fileID: 383329526}
+--- !u!114 &2059774028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2059774027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4e9bd8b20636b5418ffa8564847bf39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OrthographicSize: 8
 --- !u!1 &2064987918
 GameObject:
   m_ObjectHideFlags: 0
