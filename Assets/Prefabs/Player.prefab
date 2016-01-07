@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21248068}
   - 95: {fileID: 9531888}
   - 114: {fileID: 11439808}
+  - 114: {fileID: 11408704}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -47,6 +48,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11408704
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4e9bd8b20636b5418ffa8564847bf39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orthographicSize: 9
 --- !u!114 &11439808
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -58,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f6e2d54bff095847bdea08a57626196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 8
+  walkingSpeed: 6
 --- !u!212 &21248068
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -69,7 +82,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6257671cc7f34cb428f8d220115e615b, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
