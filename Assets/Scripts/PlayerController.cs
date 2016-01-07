@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class PlayerController : MonoBehaviour
         walking = false;
         walkingDirection = Vector2.zero;
 
-        if(Input.GetButton("MoveUp"))
+        if (Input.GetButton("MoveUp"))
         {
             up = true;
             down = left = right = false;
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
             walkingDirection = Vector2.up;
         }
 
-        if(Input.GetButton("MoveDown"))
+        if (Input.GetButton("MoveDown"))
         {
             down = true;
             up = left = right = false;
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
             walkingDirection = Vector2.down;
         }
 
-        if(Input.GetButton("MoveLeft"))
+        if (Input.GetButton("MoveLeft"))
         {
             left = true;
             up = down = right = false;
@@ -52,7 +53,7 @@ public class PlayerController : MonoBehaviour
             walkingDirection = Vector2.left;
         }
 
-        if(Input.GetButton("MoveRight"))
+        if (Input.GetButton("MoveRight"))
         {
             right = true;
             up = down = left = false;
@@ -63,6 +64,15 @@ public class PlayerController : MonoBehaviour
 
     void UpdatePlayer()
     {
+        Rect rect = new Rect(transform.position - new Vector3(0.5f, 0.5f) + walkingDirection * 0.15f, Vector3.one);
+
+        Collider2D collider = Physics2D.OverlapArea(rect.min, rect.max);
+        if (collider != null)
+        {
+            walking = false;
+            walkingDirection = Vector2.zero;
+        }
+
         animator.SetBool("up", up);
         animator.SetBool("down", down);
         animator.SetBool("left", left);
@@ -70,6 +80,6 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("walking", walking);
 
         transform.position += walkingDirection * walkingSpeed * Time.deltaTime;
-        GetComponent<SpriteRenderer>().sortingOrder = (int) -transform.position.y;
+        GetComponent<SpriteRenderer>().sortingOrder = (int)-transform.position.y - 1;
     }
 }
