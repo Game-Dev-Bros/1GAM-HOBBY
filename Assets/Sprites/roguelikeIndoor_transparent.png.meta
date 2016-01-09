@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 19730209e3c64a04ca76fed4056ddc7f
-timeCreated: 1452003839
+timeCreated: 1452354105
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -232,11 +232,11 @@ TextureImporter:
     21300450: piano_down_left
     21300452: piano_down_right
     21300454: piano_right_top
-    21300456: roguelikeIndoor_transparent_228
-    21300458: roguelikeIndoor_transparent_229
-    21300460: roguelikeIndoor_transparent_230
-    21300462: roguelikeIndoor_transparent_231
-    21300464: roguelikeIndoor_transparent_232
+    21300456: furniture_kitchen_squaretable_left
+    21300458: furniture_kitchen_squaretable_middle
+    21300460: furniture_kitchen_squaretable_right
+    21300462: furniture_kitchen_roundtable_left
+    21300464: furniture_kitchen_roundtable_right
     21300466: roguelikeIndoor_transparent_233
     21300468: roguelikeIndoor_transparent_234
     21300470: roguelikeIndoor_transparent_235
@@ -310,18 +310,18 @@ TextureImporter:
     21300606: roguelikeIndoor_transparent_303
     21300608: roguelikeIndoor_transparent_304
     21300610: roguelikeIndoor_transparent_305
-    21300612: roguelikeIndoor_transparent_306
-    21300614: roguelikeIndoor_transparent_307
-    21300616: roguelikeIndoor_transparent_308
+    21300612: furniture_kitchen_counter_left
+    21300614: furniture_kitchen_counter_middle1
+    21300616: furniture_kitchen_counter_middle2
     21300618: roguelikeIndoor_transparent_309
     21300620: roguelikeIndoor_transparent_310
     21300622: roguelikeIndoor_transparent_311
     21300624: roguelikeIndoor_transparent_312
     21300626: roguelikeIndoor_transparent_313
     21300628: roguelikeIndoor_transparent_314
-    21300630: roguelikeIndoor_transparent_315
-    21300632: roguelikeIndoor_transparent_316
-    21300634: roguelikeIndoor_transparent_317
+    21300630: furniture_kitchen_counter_right
+    21300632: furniture_kitchen_counter_leftcorner
+    21300634: furniture_kitchen_counter_rightcorner
     21300636: roguelikeIndoor_transparent_318
     21300638: roguelikeIndoor_transparent_319
     21300640: roguelikeIndoor_transparent_320
@@ -346,8 +346,8 @@ TextureImporter:
     21300678: roguelikeIndoor_transparent_339
     21300680: roguelikeIndoor_transparent_340
     21300682: roguelikeIndoor_transparent_341
-    21300684: roguelikeIndoor_transparent_342
-    21300686: roguelikeIndoor_transparent_343
+    21300684: furniture_kitchen_counter_topleft
+    21300686: furniture_kitchen_counter_topright
     21300688: roguelikeIndoor_transparent_344
     21300690: roguelikeIndoor_transparent_345
     21300692: roguelikeIndoor_transparent_346
@@ -371,8 +371,8 @@ TextureImporter:
     21300728: roguelikeIndoor_transparent_364
     21300730: roguelikeIndoor_transparent_365
     21300732: roguelikeIndoor_transparent_366
-    21300734: roguelikeIndoor_transparent_367
-    21300736: roguelikeIndoor_transparent_368
+    21300734: furniture_kitchen_counter_topleftend
+    21300736: furniture_kitchen_counter_toprightend
     21300738: roguelikeIndoor_transparent_369
     21300740: roguelikeIndoor_transparent_370
     21300742: stove_1_down
@@ -2884,7 +2884,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: roguelikeIndoor_transparent_228
+    - name: furniture_kitchen_squaretable_left
       rect:
         serializedVersion: 2
         x: 0
@@ -2895,7 +2895,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: roguelikeIndoor_transparent_229
+    - name: furniture_kitchen_squaretable_middle
       rect:
         serializedVersion: 2
         x: 17
@@ -2906,7 +2906,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: roguelikeIndoor_transparent_230
+    - name: furniture_kitchen_squaretable_right
       rect:
         serializedVersion: 2
         x: 34
@@ -2917,7 +2917,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: roguelikeIndoor_transparent_231
+    - name: furniture_kitchen_roundtable_left
       rect:
         serializedVersion: 2
         x: 51
@@ -2928,7 +2928,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: roguelikeIndoor_transparent_232
+    - name: furniture_kitchen_roundtable_right
       rect:
         serializedVersion: 2
         x: 68
@@ -3742,7 +3742,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: roguelikeIndoor_transparent_306
+    - name: furniture_kitchen_counter_left
       rect:
         serializedVersion: 2
         x: 0
@@ -3753,7 +3753,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: roguelikeIndoor_transparent_307
+    - name: furniture_kitchen_counter_middle1
       rect:
         serializedVersion: 2
         x: 17
@@ -3764,7 +3764,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: roguelikeIndoor_transparent_308
+    - name: furniture_kitchen_counter_middle2
       rect:
         serializedVersion: 2
         x: 34
@@ -3841,7 +3841,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: roguelikeIndoor_transparent_315
+    - name: furniture_kitchen_counter_right
       rect:
         serializedVersion: 2
         x: 153
@@ -3852,7 +3852,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: roguelikeIndoor_transparent_316
+    - name: furniture_kitchen_counter_leftcorner
       rect:
         serializedVersion: 2
         x: 170
@@ -3863,7 +3863,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: roguelikeIndoor_transparent_317
+    - name: furniture_kitchen_counter_rightcorner
       rect:
         serializedVersion: 2
         x: 187
@@ -4138,7 +4138,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: roguelikeIndoor_transparent_342
+    - name: furniture_kitchen_counter_topleft
       rect:
         serializedVersion: 2
         x: 170
@@ -4149,7 +4149,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: roguelikeIndoor_transparent_343
+    - name: furniture_kitchen_counter_topright
       rect:
         serializedVersion: 2
         x: 187
@@ -4413,7 +4413,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: roguelikeIndoor_transparent_367
+    - name: furniture_kitchen_counter_topleftend
       rect:
         serializedVersion: 2
         x: 170
@@ -4424,7 +4424,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: roguelikeIndoor_transparent_368
+    - name: furniture_kitchen_counter_toprightend
       rect:
         serializedVersion: 2
         x: 187
