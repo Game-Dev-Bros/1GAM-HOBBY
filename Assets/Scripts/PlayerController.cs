@@ -13,9 +13,15 @@ public class PlayerController : MonoBehaviour
     private Vector3 walkingDirection;
     public int walkingSpeed;
 
+    public GameObject interactiveObject;
+    public bool interacting;
+
+    public DialogController dialogController;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
+        dialogController.gameObject.SetActive(true);
     }
 
     void Update()
@@ -27,7 +33,6 @@ public class PlayerController : MonoBehaviour
     void ProcessInput()
     {
         walking = false;
-        walkingDirection = Vector2.zero;
 
         if (Input.GetButton("MoveUp"))
         {
@@ -60,17 +65,40 @@ public class PlayerController : MonoBehaviour
             walking = true;
             walkingDirection = Vector2.right;
         }
+
+        if(Input.GetButton("Action") && interactiveObject != null)
+        {
+            interacting = true;
+        }
     }
 
     void UpdatePlayer()
     {
-        Rect rect = new Rect(transform.position - new Vector3(0.5f, 0.5f) + walkingDirection * 0.15f, Vector3.one);
+        Rect wallRect = new Rect(transform.position - new Vector3(0.5f, 0.5f) + walkingDirection * 0.15f, Vector3.one);
+        Rect interactionRect = new Rect(transform.position - new Vector3(0.5f, 0.5f) + walkingDirection, Vector3.one);
 
-        Collider2D collider = Physics2D.OverlapArea(rect.min, rect.max);
-        if (collider != null)
+        Collider2D wallCollider = Physics2D.OverlapArea(wallRect.min, wallRect.max);
+        if (wallCollider != null)
         {
             walking = false;
-            walkingDirection = Vector2.zero;
+        }
+
+        Collider2D interactionCollider = Physics2D.OverlapArea(wallRect.min, wallRect.max);
+        if(interactionCollider != null && interactionCollider.tag == "Interactive")
+        {
+            InteractableController interactableController = interactionCollider.gameObject.GetComponent<InteractableController>();
+
+            if(interactableController != null)
+            {
+                interactiveObject = interactionCollider.gameObject;
+                dialogController.Show(interactableController.actions);
+            }
+        }
+        else
+        {
+            interactiveObject = null;
+            interacting = false;
+            dialogController.Hide();
         }
 
         animator.SetBool("up", up);
@@ -79,7 +107,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("right", right);
         animator.SetBool("walking", walking);
 
-        transform.position += walkingDirection * walkingSpeed * Time.deltaTime;
+        transform.position += walkingDirection * (walking ? 1 : 0) * walkingSpeed * Time.deltaTime;
         GetComponent<SpriteRenderer>().sortingOrder = (int)-transform.position.y - 1;
     }
 }
