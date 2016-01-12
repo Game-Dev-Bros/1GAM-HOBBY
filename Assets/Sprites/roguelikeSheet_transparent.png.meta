@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a7514ca714cd3c34caf23b6867edfb55
-timeCreated: 1452355567
+timeCreated: 1452617457
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -107,6 +107,9 @@ TextureImporter:
     21300200: furniture_bench
     21300202: furniture_table_small
     21300204: furniture_kitchen_fridge
+    21300206: furniture_mirror_half_straight
+    21300208: furniture_mirror_half_round
+    21300210: furniture_bin
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -1171,7 +1174,7 @@ TextureImporter:
         x: 493
         y: 496
         width: 16
-        height: 16
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1182,7 +1185,7 @@ TextureImporter:
         x: 527
         y: 496
         width: 16
-        height: 16
+        height: 13
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1280,6 +1283,39 @@ TextureImporter:
         serializedVersion: 2
         x: 544
         y: 476
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_mirror_half_straight
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 374
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_mirror_half_round
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 391
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_bin
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 508
         width: 16
         height: 16
       alignment: 0
