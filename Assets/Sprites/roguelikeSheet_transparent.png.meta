@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a7514ca714cd3c34caf23b6867edfb55
-timeCreated: 1452617457
+timeCreated: 1452686898
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -110,6 +110,13 @@ TextureImporter:
     21300206: furniture_mirror_half_straight
     21300208: furniture_mirror_half_round
     21300210: furniture_bin
+    21300212: window_brown_medium
+    21300214: window_gray_medium
+    21300216: window_brown_big
+    21300218: window_gray_big
+    21300220: furniture_side_right
+    21300222: furniture_side_left
+    21300224: furniture_livingroom_stand
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -1318,6 +1325,83 @@ TextureImporter:
         y: 508
         width: 16
         height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: window_brown_medium
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 476
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: window_gray_medium
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 476
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: window_brown_big
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 510
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: window_gray_big
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 510
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_side_right
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 476
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_side_left
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 476
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_livingroom_stand
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 493
+        width: 16
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
