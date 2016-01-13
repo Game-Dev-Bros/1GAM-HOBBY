@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b39ae5e1e83b4ee42aac3b6e7ce5931d
-timeCreated: 1452697479
+timeCreated: 1452724952
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -11,6 +11,12 @@ TextureImporter:
     21300008: furniture_kitchen_roundtable_top_right
     21300010: furniture_kitchen_roundtable_bottom_left
     21300012: furniture_kitchen_roundtable_bottom_right
+    21300014: furniture_couch_top_right
+    21300016: furniture_couch_top_middle
+    21300018: furniture_couch_top_left
+    21300020: furniture_couch_bottom_right
+    21300022: furniture_couch_bottom_middle
+    21300024: furniture_couch_bottom_left
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -128,6 +134,72 @@ TextureImporter:
         serializedVersion: 2
         x: 34
         y: 68
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_couch_top_right
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 102
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_couch_top_middle
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 102
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_couch_top_left
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 102
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_couch_bottom_right
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 85
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_couch_bottom_middle
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 85
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_couch_bottom_left
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 85
         width: 16
         height: 16
       alignment: 0
