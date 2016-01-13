@@ -11,6 +11,40 @@ public class SpriteRendererController : MonoBehaviour
     public int selectedOption;
     public Material spriteMaterial;
 
+    private bool _hideChildrenInInspector;
+    public bool hideChildrenInInspector
+    {
+        get
+        {
+            return _hideChildrenInInspector;
+        }
+        set
+        {
+            _hideChildrenInInspector = value;
+            UpdateVisibilityInInspector();
+        }
+    }
+
+    private void UpdateVisibilityInInspector()
+    {
+        foreach (Transform child in transform)
+        {
+            if(hideChildrenInInspector)
+            {
+                child.hideFlags = HideFlags.HideInHierarchy;
+            }
+            else
+            {
+                child.hideFlags = HideFlags.None;
+            }
+        }
+
+        if(hideChildrenInInspector)
+        {
+            EditorUtility.SetDirty(gameObject);
+        }
+    }
+
     public void RecalculateZOrder()
     {
         foreach (Transform child in transform)
@@ -56,6 +90,8 @@ public class SpriteOrderEditor : Editor
             controller = (SpriteRendererController)target;
         }
 
+        controller.hideChildrenInInspector = EditorGUILayout.Toggle("Hide In Inspector", controller.hideChildrenInInspector);
+        EditorGUILayout.Separator();
         GUI.enabled = !Application.isPlaying;
 
         controller.selectedOption = EditorGUILayout.Popup("Z-order Type", controller.selectedOption, zOptions);
