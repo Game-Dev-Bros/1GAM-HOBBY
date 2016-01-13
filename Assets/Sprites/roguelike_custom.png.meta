@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: b39ae5e1e83b4ee42aac3b6e7ce5931d
-timeCreated: 1452010608
+timeCreated: 1452697479
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: wall_fill_single
+    21300002: furniture_kitchen_roundtable_fill_right
+    21300004: furniture_kitchen_roundtable_fill_left
+    21300006: furniture_kitchen_roundtable_top_left
+    21300008: furniture_kitchen_roundtable_top_right
+    21300010: furniture_kitchen_roundtable_bottom_left
+    21300012: furniture_kitchen_roundtable_bottom_right
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -56,6 +62,72 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 102
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_kitchen_roundtable_fill_right
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 85
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_kitchen_roundtable_fill_left
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 85
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_kitchen_roundtable_top_left
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 102
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_kitchen_roundtable_top_right
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 102
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_kitchen_roundtable_bottom_left
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 68
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: furniture_kitchen_roundtable_bottom_right
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 68
         width: 16
         height: 16
       alignment: 0
