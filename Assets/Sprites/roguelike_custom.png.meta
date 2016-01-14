@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b39ae5e1e83b4ee42aac3b6e7ce5931d
-timeCreated: 1452724952
+timeCreated: 1452808545
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -17,6 +17,26 @@ TextureImporter:
     21300020: furniture_couch_bottom_right
     21300022: furniture_couch_bottom_middle
     21300024: furniture_couch_bottom_left
+    21300026: tv_black_down
+    21300028: pc_black_down
+    21300030: tv_black_blue
+    21300032: tv_black_white
+    21300034: pc_white_down
+    21300036: pc_blue_down
+    21300038: plant_1
+    21300040: plant_2
+    21300042: plant_4
+    21300044: plant_3
+    21300046: bathtub_left
+    21300048: bathtub_right
+    21300050: toilet_right
+    21300052: toilet_left
+    21300054: toilet_up
+    21300056: toilet_down
+    21300058: stairs_level0_1
+    21300060: stairs_level0_2
+    21300062: stairs_level1_2
+    21300064: stairs_level1_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -200,6 +220,226 @@ TextureImporter:
         serializedVersion: 2
         x: 85
         y: 85
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: tv_black_down
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 46
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: pc_black_down
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 46
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: tv_black_blue
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 23
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: tv_black_white
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 0
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: pc_white_down
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 0
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: pc_blue_down
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 23
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: plant_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 12
+        width: 19
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: plant_2
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 12
+        width: 20
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: plant_4
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 35
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: plant_3
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 9
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: bathtub_left
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 68
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: bathtub_right
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 68
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: toilet_right
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 68
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: toilet_left
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 68
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: toilet_up
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 85
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: toilet_down
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 102
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stairs_level0_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 68
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stairs_level0_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 51
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stairs_level1_2
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 51
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stairs_level1_1
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 51
         width: 16
         height: 16
       alignment: 0
