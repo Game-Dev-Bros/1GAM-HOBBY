@@ -20,10 +20,22 @@ public class PlayerController : MonoBehaviour
 
     public DialogController dialogController;
 
+    public enum PlayerOrientation
+    {
+        None,
+        Up,
+        Down,
+        Left,
+        Right
+    }
+
+    private PlayerOrientation playerOrientation;
+     
     void Awake()
     {
         animator = GetComponent<Animator>();
         dialogController.gameObject.SetActive(true);
+        playerOrientation = PlayerOrientation.Down;
     }
 
     void Update()
@@ -41,7 +53,7 @@ public class PlayerController : MonoBehaviour
             up = true;
             down = left = right = false;
             walking = true;
-            walkingDirection = Vector2.up;
+            playerOrientation = PlayerOrientation.Up;
         }
 
         if (Input.GetButton("MoveDown"))
@@ -49,7 +61,7 @@ public class PlayerController : MonoBehaviour
             down = true;
             up = left = right = false;
             walking = true;
-            walkingDirection = Vector2.down;
+            playerOrientation = PlayerOrientation.Down;
         }
 
         if (Input.GetButton("MoveLeft"))
@@ -57,7 +69,7 @@ public class PlayerController : MonoBehaviour
             left = true;
             up = down = right = false;
             walking = true;
-            walkingDirection = Vector2.left;
+            playerOrientation = PlayerOrientation.Left;
         }
 
         if (Input.GetButton("MoveRight"))
@@ -65,7 +77,7 @@ public class PlayerController : MonoBehaviour
             right = true;
             up = down = left = false;
             walking = true;
-            walkingDirection = Vector2.right;
+            playerOrientation = PlayerOrientation.Right;
         }
 
         if(Input.GetButton("Action") && interactiveObject != null)
@@ -76,32 +88,65 @@ public class PlayerController : MonoBehaviour
 
     void UpdatePlayer()
     {
+        switch(playerOrientation)
+        {
+            case PlayerOrientation.Up:
+                walkingDirection = Vector2.up;
+                break;
+            case PlayerOrientation.Down:
+                walkingDirection = Vector2.down;
+                break;
+            case PlayerOrientation.Left:
+                walkingDirection = Vector2.left;
+                break;
+            case PlayerOrientation.Right:
+                walkingDirection = Vector2.right;
+                break;
+        }
+
         Rect wallRect = new Rect(transform.position - new Vector3(0.5f, 0.5f) + walkingDirection * 0.15f, Vector3.one);
         Rect interactionRect = new Rect(transform.position - new Vector3(0.5f, 0.5f) + walkingDirection, Vector3.one);
 
-        Collider2D wallCollider = Physics2D.OverlapArea(wallRect.min, wallRect.max);
-        if (wallCollider != null)
-        {
-            walking = false;
-        }
+        Collider2D[] wallColliders = Physics2D.OverlapAreaAll(wallRect.min, wallRect.max);
 
-        Collider2D interactionCollider = Physics2D.OverlapArea(wallRect.min, wallRect.max);
-        if(interactionCollider != null && interactionCollider.tag == "Interactive")
+        foreach(Collider2D wallCollider in wallColliders)
         {
-            InteractableController interactableController = interactionCollider.gameObject.GetComponent<InteractableController>();
-
-            if(interactableController != null)
+            if (wallCollider != null)
             {
-                interactiveObject = interactionCollider.gameObject;
-                dialogController.Show(interactableController.actions);
+                walking = walking && wallCollider.isTrigger;
             }
         }
-        else
+
+        Collider2D[] interactionColliders = Physics2D.OverlapAreaAll(wallRect.min, wallRect.max);
+        
+        if(interactionColliders.Length == 0)
         {
             interactiveObject = null;
             interacting = false;
             dialogController.Hide();
         }
+
+        foreach(Collider2D interactionCollider in interactionColliders)
+        {
+            if(interactionCollider.tag == "Interactive")
+            {
+                InteractableController interactableController = interactionCollider.gameObject.GetComponent<InteractableController>();
+
+                if(interactableController.playerOrientation == PlayerOrientation.None || interactableController.playerOrientation == playerOrientation)
+                {
+                    interactiveObject = interactionCollider.gameObject;
+                    dialogController.Show(interactableController.actions);
+                    break;
+                }
+                else
+                {
+                    interactiveObject = null;
+                    interacting = false;
+                    dialogController.Hide();
+                }
+            }
+        }
+
 
         animator.SetBool("up", up);
         animator.SetBool("down", down);
