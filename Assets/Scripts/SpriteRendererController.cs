@@ -38,11 +38,12 @@ public class SpriteRendererController : MonoBehaviour
                 child.hideFlags = HideFlags.None;
             }
         }
-
+        #if UNITY_EDITOR
         if(hideChildrenInInspector)
         {
             EditorUtility.SetDirty(gameObject);
         }
+        #endif
     }
 
     public void RecalculateZOrder()
