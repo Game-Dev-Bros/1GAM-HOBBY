@@ -3,5 +3,6 @@ using UnityEngine;
 
 public class InteractableController : MonoBehaviour
 {
+    public PlayerController.PlayerOrientation playerOrientation;
     public Action[] actions;
 }
