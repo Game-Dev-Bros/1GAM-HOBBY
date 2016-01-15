@@ -6342,11 +6342,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22470972, guid: bfe5f9e85b0fcdb4d83262278b49b8a8, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0000003874302
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 22470972, guid: bfe5f9e85b0fcdb4d83262278b49b8a8, type: 2}
       propertyPath: m_SizeDelta.y
       value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 179194, guid: bfe5f9e85b0fcdb4d83262278b49b8a8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11465842, guid: bfe5f9e85b0fcdb4d83262278b49b8a8, type: 2}
+      propertyPath: m_Text
+      value: Lorem ipsum dolor sit amet
+      objectReference: {fileID: 0}
+    - target: {fileID: 11465842, guid: bfe5f9e85b0fcdb4d83262278b49b8a8, type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bfe5f9e85b0fcdb4d83262278b49b8a8, type: 2}
@@ -32807,6 +32819,80 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1001 &1889345149
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2145219002}
+    m_Modifications:
+    - target: {fileID: 451756, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 10.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 451756, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 7.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 451756, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 451756, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 451756, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 451756, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 451756, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 451756, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 135288, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+      propertyPath: m_Name
+      value: Bathroom
+      objectReference: {fileID: 0}
+    - target: {fileID: 11492038, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+      propertyPath: actions.Array.data[0].text
+      value: Use the bathroom
+      objectReference: {fileID: 0}
+    - target: {fileID: 11492038, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+      propertyPath: actions.Array.data[0].duration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 451756, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 11492038, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+      propertyPath: playerOrientation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 451756, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11492038, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+      propertyPath: actions.Array.data[0].tag
+      value: USE_BATHROOM
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &1889345150 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 451756, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
+  m_PrefabInternal: {fileID: 1889345149}
 --- !u!1 &1891620936
 GameObject:
   m_ObjectHideFlags: 0
@@ -35930,5 +36016,6 @@ Transform:
   - {fileID: 671587054}
   - {fileID: 1119892103}
   - {fileID: 1476895989}
+  - {fileID: 1889345150}
   m_Father: {fileID: 0}
   m_RootOrder: 7
