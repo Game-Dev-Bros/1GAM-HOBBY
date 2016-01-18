@@ -11,14 +11,18 @@ public class SliderController : MonoBehaviour
     public void UpdateSlider(float value = 0)
     {
         this.value = Mathf.Min(Mathf.Max(value, minValue), maxValue);
-        float angle = (maxAngle - minAngle) * (value / (maxValue - minValue)) + minAngle;
 
-        if(invertRotation)
+        if(pointer != null)
         {
-            angle = -angle;
-        }
+            float angle = (maxAngle - minAngle) * (value / (maxValue - minValue)) + minAngle;
 
-        pointer.transform.eulerAngles = new Vector3(0, 0, angle);
+            if(invertRotation)
+            {
+                angle = -angle;
+            }
+
+            pointer.transform.eulerAngles = new Vector3(0, 0, angle);
+        }
     }
 
     void OnValidate()
