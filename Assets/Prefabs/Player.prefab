@@ -81,6 +81,7 @@ GameObject:
   - 95: {fileID: 9531888}
   - 114: {fileID: 11439808}
   - 114: {fileID: 11408704}
+  - 114: {fileID: 11401952}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -115,7 +116,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 1.5, z: -0}
+  m_LocalPosition: {x: -0.4, y: 1.34, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22410764}
@@ -172,6 +173,24 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11401952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d163e82959bdb9498d1b6146f21d54f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointer: {fileID: 0}
+  minValue: 0
+  maxValue: 100
+  minAngle: -65
+  maxAngle: 65
+  invertRotation: 1
+  value: 50
 --- !u!114 &11408704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -295,15 +314,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 300
-    m_Alignment: 4
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Dialog Option
-
-'
+  m_Text: Lorem ipsum dolor sit amet
 --- !u!114 &11477660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -515,8 +532,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000027418137, y: 0.225}
-  m_SizeDelta: {x: 250, y: 24}
+  m_AnchoredPosition: {x: -0.0000027418137, y: -0.05}
+  m_SizeDelta: {x: 250, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22498846
 RectTransform:
