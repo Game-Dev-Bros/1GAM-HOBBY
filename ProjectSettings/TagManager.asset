@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Interactive
   - Stairs
+  - Fader
+  - DownstairsTransition
+  - UpstairsTransition
   layers:
   - Default
   - TransparentFX

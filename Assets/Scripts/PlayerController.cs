@@ -2,6 +2,7 @@
 using UnityEditor;
 #endif
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,6 +20,15 @@ public class PlayerController : MonoBehaviour
     public bool interacting;
 
     public DialogController dialogController;
+
+    public enum LevelTransition
+    {
+        None,
+        Upstairs,
+        Downstairs
+    }
+
+    private LevelTransition CurrentLevelTransition = LevelTransition.None;
 
     public enum PlayerOrientation
     {
@@ -40,9 +50,25 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        ProcessLevelTransition();
         ProcessInput();
         UpdatePlayer();
     }
+
+
+    void ProcessLevelTransition()
+    {
+        switch(CurrentLevelTransition)
+        {
+            case LevelTransition.Upstairs:
+                GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>().EndScene("Level 1"); //going up
+                break;
+            case LevelTransition.Downstairs:
+                GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>().EndScene("Level 0"); //going down
+                break;
+        }
+    }
+
 
     void ProcessInput()
     {
@@ -221,4 +247,19 @@ public class PlayerController : MonoBehaviour
             transform.position = newPosition;
         }
     }
+
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "DownstairsTransition")
+        {
+            CurrentLevelTransition = LevelTransition.Downstairs;
+        }
+        else if (other.tag == "UpstairsTransition")
+        {
+            CurrentLevelTransition = LevelTransition.Upstairs;
+        }
+    }
+
+
 }
