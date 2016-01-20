@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
         foreach(Collider2D wallCollider in wallColliders)
         {
-            if (wallCollider != null)
+            if (wallCollider != null && currentStairs == null)
             {
                 walking = walking && wallCollider.isTrigger;
             }
@@ -154,7 +154,71 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("right", right);
         animator.SetBool("walking", walking);
 
+        if(currentStairs != null)
+        {
+            switch(currentStairs.ascendingDirection)
+            {
+                case PlayerOrientation.Up:
+                case PlayerOrientation.Down:
+                    walking = walking && (playerOrientation == PlayerOrientation.Up || playerOrientation == PlayerOrientation.Down);
+                    break;
+                case PlayerOrientation.Left:
+                case PlayerOrientation.Right:
+                    walking = walking && (playerOrientation == PlayerOrientation.Left || playerOrientation == PlayerOrientation.Right);
+                    break;
+            }
+        }
+
         transform.position += walkingDirection * (walking ? 1 : 0) * walkingSpeed * Time.deltaTime;
-        GetComponent<SpriteRenderer>().sortingOrder = (int)-transform.position.y - 1;
+        GetComponent<SpriteRenderer>().sortingOrder = (currentStairs != null) ? 100 : (int)-transform.position.y - 1;
+    }
+
+    private int lastStep = 0;
+    public StairsController currentStairs;
+
+    public void SetStairs(StairsController stairs)
+    {
+        currentStairs = stairs;
+
+        float stepDx = 0, stepDy = 0;
+        float currentStep = 0;
+
+        if(stairs != null)
+        {
+            switch(stairs.ascendingDirection)
+            {
+                case PlayerOrientation.Up:
+                case PlayerOrientation.Down:
+                    break;
+                case PlayerOrientation.Left:
+                    currentStep = (stairs.bounds.max.x - transform.position.x) / (stairs.bounds.max.x - stairs.bounds.min.x);
+                    stepDy = stairs.bounds.size.y / stairs.steps;
+                    if(playerOrientation == PlayerOrientation.Right)
+                    {
+                        stepDy = -stepDy;
+                    }
+
+                    break;
+                case PlayerOrientation.Right:
+                    currentStep = (transform.position.x - stairs.bounds.min.x) / (stairs.bounds.max.x - stairs.bounds.min.x);
+                    stepDy = stairs.bounds.size.y / stairs.steps;
+                    if(playerOrientation == PlayerOrientation.Left)
+                    {
+                        stepDy = -stepDy;
+                    }
+                    break;
+            }
+
+            currentStep = (int) (currentStep * stairs.steps);
+        }
+
+        if(lastStep != currentStep)
+        {
+            lastStep = (int) currentStep;
+            Vector3 newPosition = transform.position;
+            newPosition.x += stepDx;
+            newPosition.y += stepDy;
+            transform.position = newPosition;
+        }
     }
 }
