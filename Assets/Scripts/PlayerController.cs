@@ -147,13 +147,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
-        animator.SetBool("up", up);
-        animator.SetBool("down", down);
-        animator.SetBool("left", left);
-        animator.SetBool("right", right);
-        animator.SetBool("walking", walking);
-
         if(currentStairs != null)
         {
             switch(currentStairs.ascendingDirection)
@@ -168,6 +161,13 @@ public class PlayerController : MonoBehaviour
                     break;
             }
         }
+
+        animator.SetBool("up", up);
+        animator.SetBool("down", down);
+        animator.SetBool("left", left);
+        animator.SetBool("right", right);
+        animator.SetBool("walking", walking);
+
 
         transform.position += walkingDirection * (walking ? 1 : 0) * walkingSpeed * Time.deltaTime;
         GetComponent<SpriteRenderer>().sortingOrder = (currentStairs != null) ? 100 : (int)-transform.position.y - 1;
