@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
 
 
         transform.position += walkingDirection * (walking ? 1 : 0) * walkingSpeed * Time.deltaTime;
-        GetComponent<SpriteRenderer>().sortingOrder = (currentStairs != null) ? 100 : (int)-transform.position.y - 1;
+        GetComponent<SpriteRenderer>().sortingOrder = (currentStairs != null) ? currentStairs.playerZOrder : (int)-transform.position.y - 1;
     }
 
     private int lastStep = 0;

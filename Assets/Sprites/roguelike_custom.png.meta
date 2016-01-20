@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b39ae5e1e83b4ee42aac3b6e7ce5931d
-timeCreated: 1452808545
+timeCreated: 1453251613
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -33,8 +33,8 @@ TextureImporter:
     21300052: toilet_left
     21300054: toilet_up
     21300056: toilet_down
-    21300058: stairs_level0_1
-    21300060: stairs_level0_2
+    21300058: stairs_hider_right
+    21300060: stairs_hider_left
     21300062: stairs_level1_2
     21300064: stairs_level1_1
   serializedVersion: 2
@@ -402,7 +402,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stairs_level0_1
+    - name: stairs_hider_right
       rect:
         serializedVersion: 2
         x: 0
@@ -413,7 +413,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stairs_level0_2
+    - name: stairs_hider_left
       rect:
         serializedVersion: 2
         x: 0

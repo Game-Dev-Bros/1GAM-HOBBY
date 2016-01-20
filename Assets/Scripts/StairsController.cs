@@ -4,6 +4,7 @@ public class StairsController : MonoBehaviour
 {
     public int steps;
     public PlayerController.PlayerOrientation ascendingDirection;
+    public int playerZOrder;
 
     [HideInInspector]
     public Bounds bounds;
