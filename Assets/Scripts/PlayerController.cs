@@ -6,13 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-
     public static bool IsChangingLevels = true;
-
 
     private Animator animator;
 
-    private bool up, down, left, right;
     private bool walking;
 
     private float animationTime;
@@ -45,13 +42,20 @@ public class PlayerController : MonoBehaviour
 
     private PlayerOrientation playerOrientation;
      
+    private int lastStep = 0;
+    public StairsController currentStairs;
+
+    private PersistentData persistentData;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
         dialogController.gameObject.SetActive(true);
         playerOrientation = PlayerOrientation.Down;
 
-        if (GameObject.Find("PersistentDataObject").GetComponent<PersistentData>().HasChangedFloors)
+        persistentData = GameObject.Find("PersistentDataObject").GetComponent<PersistentData>();
+
+        if (persistentData.hasChangedFloors)
         {
             if (SceneManager.GetActiveScene().name == "Level 0")
             {
@@ -67,7 +71,8 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("walking", false);
                 playerOrientation = PlayerOrientation.Right;
             }
-            GameObject.Find("PersistentDataObject").GetComponent<PersistentData>().HasChangedFloors = false;
+
+            persistentData.hasChangedFloors = false;
         }
     }
 
@@ -77,7 +82,6 @@ public class PlayerController : MonoBehaviour
         ProcessInput();
         UpdatePlayer();
     }
-
 
     void ProcessLevelTransition()
     {
@@ -92,41 +96,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     void ProcessInput()
     {
-
-
         walking = false;
 
         if (Input.GetButton("MoveUp"))
         {
-            up = true;
-            down = left = right = false;
             walking = true;
             playerOrientation = PlayerOrientation.Up;
         }
 
         if (Input.GetButton("MoveDown"))
         {
-            down = true;
-            up = left = right = false;
             walking = true;
             playerOrientation = PlayerOrientation.Down;
         }
 
         if (Input.GetButton("MoveLeft"))
         {
-            left = true;
-            up = down = right = false;
             walking = true;
             playerOrientation = PlayerOrientation.Left;
         }
 
         if (Input.GetButton("MoveRight"))
         {
-            right = true;
-            up = down = left = false;
             walking = true;
             playerOrientation = PlayerOrientation.Right;
         }
@@ -141,9 +134,10 @@ public class PlayerController : MonoBehaviour
     {
         //freezes player while changing floors
         if (CurrentLevelTransition != LevelTransition.None)
+        {
             return;
+        }
         
-
         switch(playerOrientation)
         {
             case PlayerOrientation.Up:
@@ -218,20 +212,16 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        animator.SetBool("up", up);
-        animator.SetBool("down", down);
-        animator.SetBool("left", left);
-        animator.SetBool("right", right);
+        animator.SetBool("up", playerOrientation == PlayerOrientation.Up);
+        animator.SetBool("down", playerOrientation == PlayerOrientation.Down);
+        animator.SetBool("left", playerOrientation == PlayerOrientation.Left);
+        animator.SetBool("right", playerOrientation == PlayerOrientation.Right);
         animator.SetBool("walking", walking);
-
 
         transform.position += walkingDirection * (walking ? 1 : 0) * walkingSpeed * Time.deltaTime;
         GetComponent<SpriteRenderer>().sortingOrder = (currentStairs != null) ? currentStairs.playerZOrder : (int)-transform.position.y - 1;
     }
-
-    private int lastStep = 0;
-    public StairsController currentStairs;
-
+    
     public void SetStairs(StairsController stairs)
     {
         currentStairs = stairs;
@@ -246,6 +236,7 @@ public class PlayerController : MonoBehaviour
                 case PlayerOrientation.Up:
                 case PlayerOrientation.Down:
                     break;
+
                 case PlayerOrientation.Left:
                     currentStep = (stairs.bounds.max.x - transform.position.x) / (stairs.bounds.max.x - stairs.bounds.min.x);
                     stepDy = stairs.bounds.size.y / stairs.steps;
@@ -253,8 +244,8 @@ public class PlayerController : MonoBehaviour
                     {
                         stepDy = -stepDy;
                     }
-
                     break;
+
                 case PlayerOrientation.Right:
                     currentStep = (transform.position.x - stairs.bounds.min.x) / (stairs.bounds.max.x - stairs.bounds.min.x);
                     stepDy = stairs.bounds.size.y / stairs.steps;
@@ -278,12 +269,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (!GameObject.Find("PersistentDataObject").GetComponent<PersistentData>().HasChangedFloors)
-            GameObject.Find("PersistentDataObject").GetComponent<PersistentData>().HasChangedFloors = true;
-
+        if (!persistentData.hasChangedFloors)
+        {
+            persistentData.hasChangedFloors = true;
+        }
 
         if (other.tag == "DownstairsTransition")
         {
@@ -294,5 +285,4 @@ public class PlayerController : MonoBehaviour
             CurrentLevelTransition = LevelTransition.Upstairs;
         }
     }
-
 }

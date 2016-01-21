@@ -4,7 +4,7 @@ using System.Collections;
 public class PersistentData : MonoBehaviour
 {
 
-    public bool HasChangedFloors = false;
+    public bool hasChangedFloors = false;
 
 
     // Use this for initialization
