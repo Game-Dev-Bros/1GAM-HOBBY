@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    private const string FLOOR_CHANGE_KEY = "ChangedFloor";
     public static bool IsChangingLevels = true;
 
     private Animator animator;
@@ -34,19 +35,20 @@ public class PlayerController : MonoBehaviour
     private int lastStep = 0;
     public StairsController currentStairs;
 
-    private PersistentData persistentData;
 
     private ScreenFader screenFader;
 
     void Awake()
     {
+        var hasChangedFloors = PlayerPrefs.GetInt(FLOOR_CHANGE_KEY, -1);
+        Debug.Log("has changed floor "+hasChangedFloors);
+
         animator = GetComponent<Animator>();
         dialogController.gameObject.SetActive(true);
         playerOrientation = PlayerOrientation.Down;
 
-        persistentData = GameObject.Find("PersistentDataObject").GetComponent<PersistentData>();
 
-        if (persistentData.hasChangedFloors)
+        if (hasChangedFloors == 1)
         {
             if (SceneManager.GetActiveScene().name == "Level 0")
             {
@@ -63,7 +65,7 @@ public class PlayerController : MonoBehaviour
                 playerOrientation = PlayerOrientation.Right;
             }
 
-            persistentData.hasChangedFloors = false;
+            PlayerPrefs.SetInt(FLOOR_CHANGE_KEY, 0);
         }
 
         screenFader = GameObject.Find("Fader").GetComponent<ScreenFader>();
@@ -249,17 +251,20 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
+        if (PlayerPrefs.GetInt(FLOOR_CHANGE_KEY, -1) == 1)
+            return;
+
         if (other.tag == "DownstairsTransition")
         {
-            persistentData.hasChangedFloors = true;
+            Debug.Log(other.transform.name);
+            PlayerPrefs.SetInt(FLOOR_CHANGE_KEY, 1);
             StartCoroutine(screenFader.FadeToScene("Level 0"));
-            Destroy(GetComponent<Collider2D>());
         }
         else if (other.tag == "UpstairsTransition")
         {
-            persistentData.hasChangedFloors = true;
+            Debug.Log(other.transform.name);
+            PlayerPrefs.SetInt(FLOOR_CHANGE_KEY, 1);
             StartCoroutine(screenFader.FadeToScene("Level 1"));
-            Destroy(GetComponent<Collider2D>());
         }
     }
 }
