@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5661b884cf4a874984faeeacdcbba9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsChangingFloors: 1
+  hasChangedFloors: 0
 --- !u!4 &1293501274
 Transform:
   m_ObjectHideFlags: 0

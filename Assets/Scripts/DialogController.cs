@@ -32,9 +32,15 @@ public class DialogController : MonoBehaviour
     {
         isVisible = true;
 
-        // hardcoded for a single dialog
-        currentAction = actions[0];
-        dialogText.text = actions[0].text;
+        foreach(Action action in actions)
+        {
+            if(action.active)
+            {
+                currentAction = action;
+                dialogText.text = action.text;
+                break;
+            }
+        }
     }
 
     private void Animate()
@@ -49,10 +55,12 @@ public class DialogController : MonoBehaviour
 
         color = button.color;
         color.a = isVisible ? 1 : 0;
+        color.a = (currentAction != null && currentAction.interactable) ? color.a : 0;
         button.color = color;
 
         color = buttonText.color;
         color.a = isVisible ? 1 : 0;
+        color.a = (currentAction != null && currentAction.interactable) ? color.a : 0;
         buttonText.color = color;
     }
 }

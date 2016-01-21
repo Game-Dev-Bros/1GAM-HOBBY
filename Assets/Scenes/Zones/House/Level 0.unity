@@ -34153,7 +34153,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 451756, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 10.02
+      value: 10.52
       objectReference: {fileID: 0}
     - target: {fileID: 451756, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
       propertyPath: m_LocalPosition.y
@@ -34197,7 +34197,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 451756, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
       propertyPath: m_LocalScale.x
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11492038, guid: ae8fb961f8fced649a9d7c001eb7db10, type: 2}
       propertyPath: playerOrientation
