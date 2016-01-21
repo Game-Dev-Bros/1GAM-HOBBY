@@ -24366,6 +24366,14 @@ Prefab:
       propertyPath: fadeSpeed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11417504, guid: fff936e514a2d184794cea334a0c8424, type: 2}
+      propertyPath: fadeImage
+      value: 
+      objectReference: {fileID: 2101034098}
+    - target: {fileID: 11417504, guid: fff936e514a2d184794cea334a0c8424, type: 2}
+      propertyPath: fadeTime
+      value: 0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fff936e514a2d184794cea334a0c8424, type: 2}
   m_IsPrefabParent: 0
@@ -42588,7 +42596,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2101034097}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 

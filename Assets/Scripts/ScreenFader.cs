@@ -5,77 +5,41 @@ using UnityEngine.SceneManagement;
 
 public class ScreenFader : MonoBehaviour
 {
-    public Image FadeImg;
-    public float fadeSpeed = 1.5f;
-    public bool sceneStarting = true;
-
+    public Image fadeImage;
+    public float fadeTime = 1.5f;
+    private float fadeStep = 0;
+    public bool isRunning = false;
 
     void Awake()
     {
-        FadeImg.rectTransform.localScale = new Vector2(Screen.width, Screen.height);
+        fadeImage.rectTransform.localScale = new Vector2(Screen.width, Screen.height);
+        fadeImage.enabled = true;
+        fadeImage.color = Color.black;
+        StartCoroutine(FadeToColor(Color.clear, fadeTime));
     }
 
-    void Update()
+    IEnumerator FadeToColor(Color endColor, float fadeTime, int steps = 60)
     {
-        if (GameObject.Find("PersistentDataObject").GetComponent<PersistentData>().hasChangedFloors)
-            sceneStarting = false;
-        // If the scene is starting...
-        if (sceneStarting)
-            // ... call the StartScene function.
-            StartScene();
-    }
+        isRunning = true;
 
+        Color startColor = fadeImage.color;
 
-    void FadeToClear()
-    {
-        // Lerp the colour of the image between itself and transparent.
-        FadeImg.color = Color.Lerp(FadeImg.color, Color.clear, fadeSpeed * Time.deltaTime);
-    }
-
-
-    void FadeToBlack()
-    {
-        // Lerp the colour of the image between itself and black.
-        FadeImg.color = Color.Lerp(FadeImg.color, Color.black, fadeSpeed * Time.deltaTime);
-    }
-
-
-    void StartScene()
-    {
-        // Fade the texture to clear.
-        FadeToClear();
-
-        // If the texture is almost clear...
-        if (FadeImg.color.a <= 0.05f)
+        for(float s = 0; s <= steps; s++)
         {
-            // ... set the colour to clear and disable the RawImage.
-            FadeImg.color = Color.clear;
-            FadeImg.enabled = false;
-
-            // The scene is no longer starting.
-            sceneStarting = false;
+            fadeImage.color = Color.Lerp(startColor, endColor, s / steps);
+            yield return new WaitForSeconds(fadeTime / steps);
         }
+
+        isRunning = false;
     }
 
-
-    public void EndScene(string SceneName)
+    public IEnumerator FadeToScene(string sceneName)
     {
-        // Make sure the RawImage is enabled.
-        FadeImg.enabled = true;
+        fadeImage.enabled = true;
+        fadeImage.color = Color.clear;
 
-        // Start fading towards black.
-        FadeToBlack();
-
-        // If the screen is almost black...
-        if (FadeImg.color.a >= 0.95f)
-            //GameObject.Find("PersistentDataObject").GetComponent<PersistentData>().HasChangedFloors = false;
-            // ... reload the level
-            //PlayerController.IsChangingLevels = false;
-            SceneManager.LoadScene(SceneName);
-
+        yield return StartCoroutine(FadeToColor(Color.black, fadeTime));
+        SceneManager.LoadScene(sceneName);
     }
-
-
-
-
 }
+

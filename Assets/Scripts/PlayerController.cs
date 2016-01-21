@@ -22,15 +22,6 @@ public class PlayerController : MonoBehaviour
 
     public DialogController dialogController;
 
-    public enum LevelTransition
-    {
-        None,
-        Upstairs,
-        Downstairs
-    }
-
-    private LevelTransition CurrentLevelTransition = LevelTransition.None;
-
     public enum PlayerOrientation
     {
         None,
@@ -46,6 +37,8 @@ public class PlayerController : MonoBehaviour
     public StairsController currentStairs;
 
     private PersistentData persistentData;
+
+    private ScreenFader screenFader;
 
     void Awake()
     {
@@ -74,26 +67,14 @@ public class PlayerController : MonoBehaviour
 
             persistentData.hasChangedFloors = false;
         }
+
+        screenFader = GameObject.Find("Fader").GetComponent<ScreenFader>();
     }
 
     void Update()
     {
-        ProcessLevelTransition();
         ProcessInput();
         UpdatePlayer();
-    }
-
-    void ProcessLevelTransition()
-    {
-        switch(CurrentLevelTransition)
-        {
-            case LevelTransition.Upstairs:
-                GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>().EndScene("Level 1"); //going up
-                break;
-            case LevelTransition.Downstairs:
-                GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>().EndScene("Level 0"); //going down
-                break;
-        }
     }
 
     void ProcessInput()
@@ -132,8 +113,7 @@ public class PlayerController : MonoBehaviour
 
     void UpdatePlayer()
     {
-        //freezes player while changing floors
-        if (CurrentLevelTransition != LevelTransition.None)
+        if (screenFader.isRunning)
         {
             return;
         }
@@ -271,18 +251,17 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (!persistentData.hasChangedFloors)
-        {
-            persistentData.hasChangedFloors = true;
-        }
-
         if (other.tag == "DownstairsTransition")
         {
-            CurrentLevelTransition = LevelTransition.Downstairs;
+            Debug.Log(other.gameObject.name);
+            persistentData.hasChangedFloors = true;
+            StartCoroutine(screenFader.FadeToScene("Level 0"));
         }
         else if (other.tag == "UpstairsTransition")
         {
-            CurrentLevelTransition = LevelTransition.Upstairs;
+            Debug.Log(other.gameObject.name);
+            persistentData.hasChangedFloors = true;
+            StartCoroutine(screenFader.FadeToScene("Level 1"));
         }
     }
 }
