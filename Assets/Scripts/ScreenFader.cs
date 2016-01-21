@@ -17,6 +17,8 @@ public class ScreenFader : MonoBehaviour
 
     void Update()
     {
+        if (GameObject.Find("PersistentDataObject").GetComponent<PersistentData>().hasChangedFloors)
+            sceneStarting = false;
         // If the scene is starting...
         if (sceneStarting)
             // ... call the StartScene function.
