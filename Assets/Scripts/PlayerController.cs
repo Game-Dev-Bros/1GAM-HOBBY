@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Collider2D[] interactionColliders = Physics2D.OverlapAreaAll(wallRect.min, wallRect.max);
+        Collider2D[] interactionColliders = Physics2D.OverlapAreaAll(interactionRect.min, interactionRect.max);
         
         if(interactionColliders.Length == 0)
         {
