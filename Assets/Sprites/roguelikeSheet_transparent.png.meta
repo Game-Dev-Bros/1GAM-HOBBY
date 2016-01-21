@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a7514ca714cd3c34caf23b6867edfb55
-timeCreated: 1453045961
+timeCreated: 1453412233
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -122,6 +122,8 @@ TextureImporter:
     21300230: furniture_table_small_left
     21300232: roguelikeSheet_transparent_0
     21300234: furniture_bedroom_bed_top
+    21300236: big_door_left
+    21300238: big_door_right
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -1460,6 +1462,28 @@ TextureImporter:
         serializedVersion: 2
         x: 255
         y: 459
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: big_door_left
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 425
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: big_door_right
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 425
         width: 16
         height: 16
       alignment: 0
