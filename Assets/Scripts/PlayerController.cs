@@ -12,8 +12,6 @@ public class PlayerController : MonoBehaviour
 
     private bool walking;
 
-    private float animationTime;
-
     private Vector3 walkingDirection;
     public int walkingSpeed;
 
@@ -253,15 +251,15 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "DownstairsTransition")
         {
-            Debug.Log(other.gameObject.name);
             persistentData.hasChangedFloors = true;
             StartCoroutine(screenFader.FadeToScene("Level 0"));
+            Destroy(GetComponent<Collider2D>());
         }
         else if (other.tag == "UpstairsTransition")
         {
-            Debug.Log(other.gameObject.name);
             persistentData.hasChangedFloors = true;
             StartCoroutine(screenFader.FadeToScene("Level 1"));
+            Destroy(GetComponent<Collider2D>());
         }
     }
 }
