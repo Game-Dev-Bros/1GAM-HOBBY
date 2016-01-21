@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public static bool IsChangingLevels = true;
+
+
     private Animator animator;
 
     private bool up, down, left, right;
@@ -46,6 +50,25 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         dialogController.gameObject.SetActive(true);
         playerOrientation = PlayerOrientation.Down;
+
+        if (GameObject.Find("PersistentDataObject").GetComponent<PersistentData>().HasChangedFloors)
+        {
+            if (SceneManager.GetActiveScene().name == "Level 0")
+            {
+                transform.position = new Vector3(-1.4f, 3.88f, 0f);
+                animator.SetBool("right", true);
+                animator.SetBool("walking", false);
+                playerOrientation = PlayerOrientation.Right;
+            }
+            else if (SceneManager.GetActiveScene().name == "Level 1")
+            {
+                transform.position = new Vector3(-1f, 3.97f, 0f);
+                animator.SetBool("right", true);
+                animator.SetBool("walking", false);
+                playerOrientation = PlayerOrientation.Right;
+            }
+            GameObject.Find("PersistentDataObject").GetComponent<PersistentData>().HasChangedFloors = false;
+        }
     }
 
     void Update()
@@ -72,6 +95,8 @@ public class PlayerController : MonoBehaviour
 
     void ProcessInput()
     {
+
+
         walking = false;
 
         if (Input.GetButton("MoveUp"))
@@ -114,6 +139,11 @@ public class PlayerController : MonoBehaviour
 
     void UpdatePlayer()
     {
+        //freezes player while changing floors
+        if (CurrentLevelTransition != LevelTransition.None)
+            return;
+        
+
         switch(playerOrientation)
         {
             case PlayerOrientation.Up:
@@ -251,6 +281,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
+        if (!GameObject.Find("PersistentDataObject").GetComponent<PersistentData>().HasChangedFloors)
+            GameObject.Find("PersistentDataObject").GetComponent<PersistentData>().HasChangedFloors = true;
+
+
         if (other.tag == "DownstairsTransition")
         {
             CurrentLevelTransition = LevelTransition.Downstairs;
@@ -260,6 +294,5 @@ public class PlayerController : MonoBehaviour
             CurrentLevelTransition = LevelTransition.Upstairs;
         }
     }
-
 
 }

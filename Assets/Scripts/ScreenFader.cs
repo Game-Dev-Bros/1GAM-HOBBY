@@ -66,15 +66,14 @@ public class ScreenFader : MonoBehaviour
 
         // If the screen is almost black...
         if (FadeImg.color.a >= 0.95f)
+            //GameObject.Find("PersistentDataObject").GetComponent<PersistentData>().HasChangedFloors = false;
             // ... reload the level
+            //PlayerController.IsChangingLevels = false;
             SceneManager.LoadScene(SceneName);
+
     }
 
 
 
-    public void Derp()
-    {
-        SceneManager.LoadScene("Level 0");
-    }
 
 }
