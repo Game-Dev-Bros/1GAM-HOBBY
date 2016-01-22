@@ -138,7 +138,6 @@ public class PlayerController : MonoBehaviour
         }
 
         Rect wallRect = new Rect(transform.position - new Vector3(0.5f, 0.5f) + walkingDirection * 0.15f, Vector3.one);
-        Rect interactionRect = new Rect(transform.position - new Vector3(0.5f, 0.5f) + walkingDirection, Vector3.one);
 
         Collider2D[] wallColliders = Physics2D.OverlapAreaAll(wallRect.min, wallRect.max);
 
@@ -150,6 +149,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        Rect interactionRect = new Rect(transform.position - new Vector3(0.5f, 0.5f), Vector3.one);
         Collider2D[] interactionColliders = Physics2D.OverlapAreaAll(interactionRect.min, interactionRect.max);
         
         if(interactionColliders.Length == 0)
@@ -171,13 +171,11 @@ public class PlayerController : MonoBehaviour
                     dialogController.Show(interactableController.actions);
                     break;
                 }
-                else
-                {
-                    interactiveObject = null;
-                    interacting = false;
-                    dialogController.Hide();
-                }
             }
+
+            interactiveObject = null;
+            interacting = false;
+            dialogController.Hide();
         }
 
         if(currentStairs != null)
