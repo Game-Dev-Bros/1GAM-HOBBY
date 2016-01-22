@@ -11,10 +11,18 @@ public class SliderController : MonoBehaviour
     void Awake()
     {
         value = PlayerPrefs.GetFloat("Pointer");
+        UpdateSlider(value);
+    }
+
+    void Update()
+    {
+        //value += 0.05f;
+        //UpdateSlider(value);
     }
 
     public void UpdateSlider(float value = 0)
     {
+
         this.value = Mathf.Min(Mathf.Max(value, minValue), maxValue);
 
         if(pointer != null)
