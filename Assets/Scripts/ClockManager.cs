@@ -27,9 +27,16 @@ public class ClockManager : MonoBehaviour
 
     void Awake()
     {
-        currentGameTime = ((int)DayOfWeek.Friday - totalGameDays + 1) * 24 * 60 * 60;
-        maxGameTime = (long)currentGameTime + totalGameDays * 24 * 60 * 60 - 1; // 11:59pm @ Friday
-        currentGameTime += 8 * 60 * 60; // 8am @ starting day;
+        if (PlayerPrefs.GetFloat("Time") == 0)
+        {
+            currentGameTime = ((int)DayOfWeek.Friday - totalGameDays + 1) * 24 * 60 * 60;
+            maxGameTime = (long)currentGameTime + totalGameDays * 24 * 60 * 60 - 1; // 11:59pm @ Friday
+            currentGameTime += 8 * 60 * 60; // 8am @ starting day;
+        }
+        else {
+            currentGameTime = PlayerPrefs.GetFloat("Time");
+            maxGameTime = (long)currentGameTime + totalGameDays * 24 * 60 * 60 - 1; // 11:59pm @ Friday
+        }
     }
 
     void Update()
@@ -46,6 +53,11 @@ public class ClockManager : MonoBehaviour
 
         dayText.text = GetDayFromTime((long)currentGameTime);
         hourText.text = GetHourFromTime((long)currentGameTime);
+    }
+
+    public float GetCurrentGameTime()
+    {
+        return currentGameTime;
     }
 
     private string GetDayFromTime(long time)

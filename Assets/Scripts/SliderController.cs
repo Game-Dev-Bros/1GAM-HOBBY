@@ -8,6 +8,11 @@ public class SliderController : MonoBehaviour
     public bool invertRotation;
     public float value;
 
+    void Awake()
+    {
+        value = PlayerPrefs.GetFloat("Pointer");
+    }
+
     public void UpdateSlider(float value = 0)
     {
         this.value = Mathf.Min(Mathf.Max(value, minValue), maxValue);
