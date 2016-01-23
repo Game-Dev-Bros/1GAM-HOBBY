@@ -292,6 +292,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1293501274}
   - 114: {fileID: 1293501273}
+  - 114: {fileID: 1293501275}
   m_Layer: 0
   m_Name: PersistentDataObject
   m_TagString: Untagged
@@ -323,6 +324,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!114 &1293501275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1293501272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e24d7e50f1433444b975c4099dc6a618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FirstClip: {fileID: 8300000, guid: 31a4da6272725a24b85f2271194f746d, type: 3}
 --- !u!1 &1599003429
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,8 +411,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 899307347}
-        m_MethodName: StartGame
+      - m_Target: {fileID: 1293501275}
+        m_MethodName: FadeTest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
