@@ -43,13 +43,11 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         var hasChangedFloors = PlayerPrefs.GetInt(FLOOR_CHANGE_KEY, -1);
-        Debug.Log("has changed floor "+hasChangedFloors);
         clock = GameObject.Find("Clock").GetComponent<ClockManager>();
         pointer = GetComponent<SliderController>();
         animator = GetComponent<Animator>();
         dialogController.gameObject.SetActive(true);
         playerOrientation = PlayerOrientation.Down;
-
 
         if (hasChangedFloors == 1)
         {
@@ -250,7 +248,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     public void SavePlayerData()
     {
         PlayerPrefs.SetFloat(TIME_KEY, clock.GetCurrentGameTime());
@@ -264,15 +261,11 @@ public class PlayerController : MonoBehaviour
 
         if (other.tag == "DownstairsTransition")
         {
-            SavePlayerData();
-            Debug.Log(other.transform.name);
             PlayerPrefs.SetInt(FLOOR_CHANGE_KEY, 1);
             StartCoroutine(screenFader.FadeToScene("Level 0"));
         }
         else if (other.tag == "UpstairsTransition")
         {
-            SavePlayerData();
-            Debug.Log(other.transform.name);
             PlayerPrefs.SetInt(FLOOR_CHANGE_KEY, 1);
             StartCoroutine(screenFader.FadeToScene("Level 1"));
         }
