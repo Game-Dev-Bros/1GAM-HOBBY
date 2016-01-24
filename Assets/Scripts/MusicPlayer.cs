@@ -6,7 +6,7 @@ public class MusicPlayer : MonoBehaviour
 {
 
     public AudioSource MpPlayer;
-    public AudioSource FootSteps;
+    public AudioSource Footsteps;
     public AudioSource Interaction;
     //public AudioClip BGM;
     // Use this for initialization
@@ -28,25 +28,28 @@ public class MusicPlayer : MonoBehaviour
 
     public void PlayFootsteps()
     {
-        if (!FootSteps.isPlaying)
+        if (!Footsteps.isPlaying)
         {
-            FootSteps.loop = true;
-            FootSteps.Play();
+            Footsteps.loop = true;
+            Footsteps.Play();
         }
     }
 
     public void StopFootsteps()
     {
-        if (FootSteps.isPlaying)
+        if (Footsteps.isPlaying)
         {
-            FootSteps.Stop();
+            Footsteps.Stop();
         }
     }
 
     public void PlayInteraction()
     {
-        FootSteps.loop = false;
-        FootSteps.Play();
+        if (!Interaction.isPlaying)
+        {
+            Interaction.loop = false;
+            Interaction.Play();
+        }
     }
 
 
