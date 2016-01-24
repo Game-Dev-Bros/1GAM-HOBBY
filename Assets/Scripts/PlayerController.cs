@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
 
     private bool walking;
-
+    private MusicPlayer mplayer;
     private Vector3 walkingDirection;
     public int walkingSpeed;
 
@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        mplayer = GameObject.Find("PersistentDataObject").GetComponent<MusicPlayer>();
         clock = GameObject.Find("Clock").GetComponent<ClockManager>();
         pointer = GetComponent<SliderController>();
         animator = GetComponent<Animator>();
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour
         bool hasChangedFloor = PlayerPrefs.GetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR) == 1;
         if (hasChangedFloor)
         {
+            mplayer.StopFootsteps();
             transform.position = new Vector3(-0.86f, 3.88f, 0f);
             playerOrientation = PlayerOrientation.Right;
 
@@ -105,6 +107,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetButton("Action") && interactiveObject != null)
         {
+            mplayer.PlayInteraction();
             interacting = true;
         }
     }
@@ -195,6 +198,11 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("left", playerOrientation == PlayerOrientation.Left);
         animator.SetBool("right", playerOrientation == PlayerOrientation.Right);
         animator.SetBool("walking", walking);
+
+        if (walking)
+            mplayer.PlayFootsteps();
+        else
+            mplayer.StopFootsteps();
 
         transform.position += walkingDirection * (walking ? 1 : 0) * walkingSpeed * Time.deltaTime;
         GetComponent<SpriteRenderer>().sortingOrder = (currentStairs != null) ? currentStairs.playerZOrder : (int)-transform.position.y - 1;
