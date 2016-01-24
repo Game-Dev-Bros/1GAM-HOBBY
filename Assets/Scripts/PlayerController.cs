@@ -44,7 +44,11 @@ public class PlayerController : MonoBehaviour
         dialogController.gameObject.SetActive(true);
         playerOrientation = PlayerOrientation.Down;
 
-        LoadPlayerData();
+        bool hasSavedGame = (PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME, Constants.Prefs.Defaults.GAME_TIME) > 0);
+        if(hasSavedGame)
+        {
+            LoadPlayerData();
+        }
 
         if (hasChangedFloor)
         {
@@ -164,9 +168,11 @@ public class PlayerController : MonoBehaviour
 
                 if(interactableController.playerOrientation == PlayerOrientation.None || interactableController.playerOrientation == playerOrientation)
                 {
-                    interactiveObject = interactionCollider.gameObject;
-                    dialogController.Show(interactableController.actions);
-                    break;
+                    if(interactiveObject != interactionCollider.gameObject && dialogController.Show(interactableController.actions))
+                    {
+                        interactiveObject = interactionCollider.gameObject;
+                        break;
+                    }
                 }
             }
 

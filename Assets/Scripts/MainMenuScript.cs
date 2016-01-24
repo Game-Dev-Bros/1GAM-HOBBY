@@ -33,7 +33,7 @@ public class MainMenuScript : MonoBehaviour
     public void StartGame()
     {
         ResetPlayerPrefs();
-        SceneManager.LoadScene(Constants.Levels.LEVEL_0);
+        SceneManager.LoadScene(Constants.Levels.LEVEL_1);
     }
 
     public void ShowMain()

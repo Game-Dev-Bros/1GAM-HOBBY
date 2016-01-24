@@ -118,7 +118,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4, y: 1.34, z: -0}
+  m_LocalPosition: {x: -13.91, y: 9.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22410764}
@@ -305,6 +305,7 @@ MonoBehaviour:
   interactiveObject: {fileID: 0}
   interacting: 0
   dialogController: {fileID: 11496678}
+  currentStairs: {fileID: 0}
 --- !u!114 &11442616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -565,8 +566,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000027418137, y: -0.05}
-  m_SizeDelta: {x: 250, y: 48}
+  m_AnchoredPosition: {x: -0.0000027418137, y: -0.1}
+  m_SizeDelta: {x: 220, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22498846
 RectTransform:
