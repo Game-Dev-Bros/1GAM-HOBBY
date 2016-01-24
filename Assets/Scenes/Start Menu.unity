@@ -504,8 +504,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2104601858}
-        m_MethodName: Use24HourClock
-        m_Mode: 6
+        m_MethodName: Update24HourClock
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1977,7 +1977,7 @@ MonoBehaviour:
   optionsMenu: {fileID: 589909332}
   continueButton: {fileID: 1599003431}
   use24HourClock: {fileID: 414468103}
-  volume: {fileID: 0}
+  volume: {fileID: 749083462}
 --- !u!1 &2111223168
 GameObject:
   m_ObjectHideFlags: 0
