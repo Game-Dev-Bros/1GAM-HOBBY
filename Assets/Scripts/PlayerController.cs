@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject interactiveObject;
     public bool interacting;
-    private MusicPlayer mplayer;
+
     public DialogController dialogController;
 
     public enum PlayerOrientation
@@ -37,8 +37,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        bool hasChangedFloor = PlayerPrefs.GetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR) == 1;
-        mplayer = GameObject.Find("PersistentDataObject").GetComponent<MusicPlayer>();
         clock = GameObject.Find("Clock").GetComponent<ClockManager>();
         pointer = GetComponent<SliderController>();
         animator = GetComponent<Animator>();
@@ -51,30 +49,24 @@ public class PlayerController : MonoBehaviour
             LoadPlayerData();
         }
 
+        bool hasChangedFloor = PlayerPrefs.GetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR) == 1;
         if (hasChangedFloor)
         {
-            mplayer.StopFootsteps();
-            if (SceneManager.GetActiveScene().name == Constants.Levels.LEVEL_0)
-            {
-                transform.position = new Vector3(-1.4f, 3.88f, 0f);
-                animator.SetBool("right", true);
-                animator.SetBool("walking", false);
-                playerOrientation = PlayerOrientation.Right;
-            }
-            else if (SceneManager.GetActiveScene().name == Constants.Levels.LEVEL_1)
-            {
-                transform.position = new Vector3(-1f, 3.97f, 0f);
-                animator.SetBool("right", true);
-                animator.SetBool("walking", false);
-                playerOrientation = PlayerOrientation.Right;
-            }
+            transform.position = new Vector3(-0.86f, 3.88f, 0f);
+            playerOrientation = PlayerOrientation.Right;
 
             PlayerPrefs.SetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR);
-
+            
             SavePlayerData();
         }
 
         screenFader = GameObject.Find("Fader").GetComponent<ScreenFader>();
+
+        animator.SetBool("up", playerOrientation == PlayerOrientation.Up);
+        animator.SetBool("down", playerOrientation == PlayerOrientation.Down);
+        animator.SetBool("left", playerOrientation == PlayerOrientation.Left);
+        animator.SetBool("right", playerOrientation == PlayerOrientation.Right);
+        animator.SetBool("walking", false);
     }
 
     void Update()
@@ -113,7 +105,6 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetButton("Action") && interactiveObject != null)
         {
-            mplayer.PlayInteraction();
             interacting = true;
         }
     }
@@ -204,10 +195,6 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("left", playerOrientation == PlayerOrientation.Left);
         animator.SetBool("right", playerOrientation == PlayerOrientation.Right);
         animator.SetBool("walking", walking);
-
-        if (walking)
-            mplayer.PlayFootsteps();
-        else mplayer.StopFootsteps();
 
         transform.position += walkingDirection * (walking ? 1 : 0) * walkingSpeed * Time.deltaTime;
         GetComponent<SpriteRenderer>().sortingOrder = (currentStairs != null) ? currentStairs.playerZOrder : (int)-transform.position.y - 1;
