@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogController : MonoBehaviour
@@ -28,6 +29,27 @@ public class DialogController : MonoBehaviour
         isVisible = false;
     }
 
+    IEnumerator WriteDialogText(Action action)
+    {
+        dialogText.text = "";
+        if(action.interactable)
+        {
+            dialogText.alignment = TextAnchor.UpperCenter;
+            dialogText.text = action.text;
+            yield return null;
+        }
+        else
+        {
+            dialogText.alignment = TextAnchor.UpperLeft;
+
+            for(int i = 0; i < action.text.Length && isVisible; i++)
+            {
+                dialogText.text += action.text[i];
+                yield return new WaitForSeconds(0.066f);
+            }
+        }
+    }
+
     public bool Show(params Action[] actions)
     {
         isVisible = false;
@@ -37,8 +59,12 @@ public class DialogController : MonoBehaviour
             if(action.active)
             {
                 isVisible = true;
-                currentAction = action;
-                dialogText.text = action.text;
+                if(currentAction != action)
+                {
+                    currentAction = action;
+                    StartCoroutine(WriteDialogText(action));
+                }
+
                 break;
             }
         }
