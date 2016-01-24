@@ -44,7 +44,11 @@ public class PlayerController : MonoBehaviour
         dialogController.gameObject.SetActive(true);
         playerOrientation = PlayerOrientation.Down;
 
-        LoadPlayerData();
+        bool hasSavedGame = (PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME, Constants.Prefs.Defaults.GAME_TIME) > 0);
+        if(hasSavedGame)
+        {
+            LoadPlayerData();
+        }
 
         if (hasChangedFloor)
         {
