@@ -6,11 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    private const string FLOOR_CHANGE_KEY = "ChangedFloor";
-    private const string TIME_KEY = "Time";
-    private const string POINTER_KEY = "Pointer";
-    public static bool IsChangingLevels = true;
-
     private Animator animator;
 
     private bool walking;
@@ -42,23 +37,25 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        var hasChangedFloors = PlayerPrefs.GetInt(FLOOR_CHANGE_KEY, -1);
+        bool hasChangedFloor = PlayerPrefs.GetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR) == 1;
         clock = GameObject.Find("Clock").GetComponent<ClockManager>();
         pointer = GetComponent<SliderController>();
         animator = GetComponent<Animator>();
         dialogController.gameObject.SetActive(true);
         playerOrientation = PlayerOrientation.Down;
 
-        if (hasChangedFloors == 1)
+        LoadPlayerData();
+
+        if (hasChangedFloor)
         {
-            if (SceneManager.GetActiveScene().name == "Level 0")
+            if (SceneManager.GetActiveScene().name == Constants.Levels.LEVEL_0)
             {
                 transform.position = new Vector3(-1.4f, 3.88f, 0f);
                 animator.SetBool("right", true);
                 animator.SetBool("walking", false);
                 playerOrientation = PlayerOrientation.Right;
             }
-            else if (SceneManager.GetActiveScene().name == "Level 1")
+            else if (SceneManager.GetActiveScene().name == Constants.Levels.LEVEL_1)
             {
                 transform.position = new Vector3(-1f, 3.97f, 0f);
                 animator.SetBool("right", true);
@@ -66,7 +63,9 @@ public class PlayerController : MonoBehaviour
                 playerOrientation = PlayerOrientation.Right;
             }
 
-            PlayerPrefs.SetInt(FLOOR_CHANGE_KEY, 0);
+            PlayerPrefs.SetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR);
+
+            SavePlayerData();
         }
 
         screenFader = GameObject.Find("Fader").GetComponent<ScreenFader>();
@@ -248,26 +247,50 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void LoadPlayerData()
+    {
+        Vector2 newPosition = Vector2.zero;
+
+        clock.currentGameTime = PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME, Constants.Prefs.Defaults.GAME_TIME);
+        pointer.value = PlayerPrefs.GetFloat(Constants.Prefs.PLAYER_STATUS, Constants.Prefs.Defaults.PLAYER_STATUS);
+
+        newPosition.x = PlayerPrefs.GetFloat(Constants.Prefs.LAST_POSITION_X, Constants.Prefs.Defaults.LAST_POSITION_X);
+        newPosition.y = PlayerPrefs.GetFloat(Constants.Prefs.LAST_POSITION_Y, Constants.Prefs.Defaults.LAST_POSITION_Y);
+        transform.position = newPosition;
+
+        playerOrientation = (PlayerOrientation) PlayerPrefs.GetInt(Constants.Prefs.LAST_ORIENTATION, Constants.Prefs.Defaults.LAST_ORIENTATION);
+        animator.SetBool("up", playerOrientation == PlayerOrientation.Up);
+        animator.SetBool("down", playerOrientation == PlayerOrientation.Down);
+        animator.SetBool("left", playerOrientation == PlayerOrientation.Left);
+        animator.SetBool("right", playerOrientation == PlayerOrientation.Right);
+        animator.SetBool("walking", false);
+    }
+
     public void SavePlayerData()
     {
-        PlayerPrefs.SetFloat(TIME_KEY, clock.GetCurrentGameTime());
-        PlayerPrefs.SetFloat(POINTER_KEY, pointer.value);
+        PlayerPrefs.SetFloat(Constants.Prefs.GAME_TIME, clock.currentGameTime);
+        PlayerPrefs.SetFloat(Constants.Prefs.PLAYER_STATUS, pointer.value);
+        PlayerPrefs.SetString(Constants.Prefs.LAST_LEVEL, SceneManager.GetActiveScene().name);
+        PlayerPrefs.SetFloat(Constants.Prefs.LAST_POSITION_X, transform.position.x);
+        PlayerPrefs.SetFloat(Constants.Prefs.LAST_POSITION_Y, transform.position.y);
+        PlayerPrefs.SetInt(Constants.Prefs.LAST_ORIENTATION, (int)playerOrientation);
+        PlayerPrefs.Save();
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (PlayerPrefs.GetInt(FLOOR_CHANGE_KEY, -1) == 1)
+        if (PlayerPrefs.GetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR) == 1)
             return;
 
         if (other.tag == "DownstairsTransition")
         {
-            PlayerPrefs.SetInt(FLOOR_CHANGE_KEY, 1);
-            StartCoroutine(screenFader.FadeToScene("Level 0"));
+            PlayerPrefs.SetInt(Constants.Prefs.CHANGING_FLOOR, 1);
+            StartCoroutine(screenFader.FadeToScene(Constants.Levels.LEVEL_0));
         }
         else if (other.tag == "UpstairsTransition")
         {
-            PlayerPrefs.SetInt(FLOOR_CHANGE_KEY, 1);
-            StartCoroutine(screenFader.FadeToScene("Level 1"));
+            PlayerPrefs.SetInt(Constants.Prefs.CHANGING_FLOOR, 1);
+            StartCoroutine(screenFader.FadeToScene(Constants.Levels.LEVEL_1));
         }
     }
 }

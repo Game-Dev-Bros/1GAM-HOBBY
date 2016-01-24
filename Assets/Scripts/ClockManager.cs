@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ClockManager : MonoBehaviour
 {
-    private float currentGameTime;
+    public float currentGameTime;
     private long maxGameTime;
     public int minutesPerSecond;
     [Range(1, 7)]
@@ -53,11 +53,6 @@ public class ClockManager : MonoBehaviour
 
         dayText.text = GetDayFromTime((long)currentGameTime);
         hourText.text = GetHourFromTime((long)currentGameTime);
-    }
-
-    public float GetCurrentGameTime()
-    {
-        return currentGameTime;
     }
 
     private string GetDayFromTime(long time)
