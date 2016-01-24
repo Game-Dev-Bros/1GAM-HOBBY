@@ -6,11 +6,13 @@ public class MusicPlayer : MonoBehaviour
 {
 
     public AudioSource MpPlayer;
-    public AudioClip BGM;
+    public AudioSource FootSteps;
+    public AudioSource Interaction;
+    //public AudioClip BGM;
     // Use this for initialization
     void Start()
     {
-        MpPlayer.clip = BGM;
+        //MpPlayer.clip = BGM;
         MpPlayer.loop = false;
         MpPlayer.Play();
     }
@@ -24,8 +26,31 @@ public class MusicPlayer : MonoBehaviour
         MpPlayer.Play();
     }
 
+    public void PlayFootsteps()
+    {
+        if (!FootSteps.isPlaying)
+        {
+            FootSteps.loop = true;
+            FootSteps.Play();
+        }
+    }
 
-    IEnumerator FadeToVolume(float volume, float fadeTime, int steps = 60)
+    public void StopFootsteps()
+    {
+        if (FootSteps.isPlaying)
+        {
+            FootSteps.Stop();
+        }
+    }
+
+    public void PlayInteraction()
+    {
+        FootSteps.loop = false;
+        FootSteps.Play();
+    }
+
+
+    public IEnumerator FadeToVolume(float volume, float fadeTime, int steps = 60)
     {
         float dif = Math.Abs(MpPlayer.volume - volume);
         float delta = dif / (float)steps;
