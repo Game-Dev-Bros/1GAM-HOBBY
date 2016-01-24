@@ -28,19 +28,22 @@ public class DialogController : MonoBehaviour
         isVisible = false;
     }
 
-    public void Show(params Action[] actions)
+    public bool Show(params Action[] actions)
     {
-        isVisible = true;
+        isVisible = false;
 
         foreach(Action action in actions)
         {
             if(action.active)
             {
+                isVisible = true;
                 currentAction = action;
                 dialogText.text = action.text;
                 break;
             }
         }
+
+        return isVisible;
     }
 
     private void Animate()

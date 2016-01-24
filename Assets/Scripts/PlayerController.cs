@@ -168,9 +168,11 @@ public class PlayerController : MonoBehaviour
 
                 if(interactableController.playerOrientation == PlayerOrientation.None || interactableController.playerOrientation == playerOrientation)
                 {
-                    interactiveObject = interactionCollider.gameObject;
-                    dialogController.Show(interactableController.actions);
-                    break;
+                    if(dialogController.Show(interactableController.actions))
+                    {
+                        interactiveObject = interactionCollider.gameObject;
+                        break;
+                    }
                 }
             }
 
