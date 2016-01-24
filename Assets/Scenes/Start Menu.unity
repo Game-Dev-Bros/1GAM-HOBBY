@@ -551,12 +551,12 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 440553566}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 497aa71acdedb344294413ddb50159e6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.764
+  m_Volume: 0.689
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2099,12 +2099,12 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1883301309}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 31a4da6272725a24b85f2271194f746d, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.799
+  m_Volume: 0.72
   m_Pitch: 1
   Loop: 0
   Mute: 0

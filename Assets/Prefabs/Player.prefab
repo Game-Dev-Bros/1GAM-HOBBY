@@ -84,6 +84,7 @@ GameObject:
   - 114: {fileID: 11439808}
   - 114: {fileID: 11408704}
   - 114: {fileID: 11401952}
+  - 114: {fileID: 11429462}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -236,6 +237,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orthographicSize: 9
+--- !u!114 &11429462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75cac57cddfac8a499c3cc1c74bda645, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 101398, guid: 0591e51fdf76b2d41b4fbe8a3d763892, type: 2}
 --- !u!114 &11436144
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -593,7 +606,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 101398, guid: 0591e51fdf76b2d41b4fbe8a3d763892, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 164802}
