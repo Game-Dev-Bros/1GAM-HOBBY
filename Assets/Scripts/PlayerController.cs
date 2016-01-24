@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        bool hasChangedFloor = PlayerPrefs.GetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR) == 1;
         clock = GameObject.Find("Clock").GetComponent<ClockManager>();
         pointer = GetComponent<SliderController>();
         animator = GetComponent<Animator>();
@@ -50,29 +49,32 @@ public class PlayerController : MonoBehaviour
             LoadPlayerData();
         }
 
+        bool hasChangedFloor = PlayerPrefs.GetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR) == 1;
         if (hasChangedFloor)
         {
             if (SceneManager.GetActiveScene().name == Constants.Levels.LEVEL_0)
             {
                 transform.position = new Vector3(-1.4f, 3.88f, 0f);
-                animator.SetBool("right", true);
-                animator.SetBool("walking", false);
                 playerOrientation = PlayerOrientation.Right;
             }
             else if (SceneManager.GetActiveScene().name == Constants.Levels.LEVEL_1)
             {
                 transform.position = new Vector3(-1f, 3.97f, 0f);
-                animator.SetBool("right", true);
-                animator.SetBool("walking", false);
                 playerOrientation = PlayerOrientation.Right;
             }
 
             PlayerPrefs.SetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR);
-
+            
             SavePlayerData();
         }
 
         screenFader = GameObject.Find("Fader").GetComponent<ScreenFader>();
+
+        animator.SetBool("up", playerOrientation == PlayerOrientation.Up);
+        animator.SetBool("down", playerOrientation == PlayerOrientation.Down);
+        animator.SetBool("left", playerOrientation == PlayerOrientation.Left);
+        animator.SetBool("right", playerOrientation == PlayerOrientation.Right);
+        animator.SetBool("walking", false);
     }
 
     void Update()
