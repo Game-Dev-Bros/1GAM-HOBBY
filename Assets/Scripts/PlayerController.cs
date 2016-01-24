@@ -52,16 +52,8 @@ public class PlayerController : MonoBehaviour
         bool hasChangedFloor = PlayerPrefs.GetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR) == 1;
         if (hasChangedFloor)
         {
-            if (SceneManager.GetActiveScene().name == Constants.Levels.LEVEL_0)
-            {
-                transform.position = new Vector3(-1.4f, 3.88f, 0f);
-                playerOrientation = PlayerOrientation.Right;
-            }
-            else if (SceneManager.GetActiveScene().name == Constants.Levels.LEVEL_1)
-            {
-                transform.position = new Vector3(-1f, 3.97f, 0f);
-                playerOrientation = PlayerOrientation.Right;
-            }
+            transform.position = new Vector3(-0.86f, 3.88f, 0f);
+            playerOrientation = PlayerOrientation.Right;
 
             PlayerPrefs.SetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR);
             
