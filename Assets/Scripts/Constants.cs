@@ -23,6 +23,8 @@
         public const string LAST_POSITION_Y = "LastPositionY";
         public const string LAST_ORIENTATION = "LastOrientation";
 
+        public const string THESIS_DELIVERED = "ThesisDelivered";
+
         public static class Defaults
         {
             public const int USE_24_HOUR_CLOCK = 1;
@@ -37,6 +39,8 @@
             public const float LAST_POSITION_X = 0;
             public const float LAST_POSITION_Y = 0;
             public const int LAST_ORIENTATION = (int) PlayerController.PlayerOrientation.Down;
+
+            public const int THESIS_DELIVERED = 0;
         }
     }
 
@@ -44,9 +48,30 @@
     {
         public const string PETE1 = "Pedro Lucas";
         public const string PETE2 = "Pedro Pereira";
-        public const string SUCCESS_GREETING = "Congratulations!\n\nYou managed to score %SCORE% this time.\nTry and balance your activities the best you can!\n";
-        public const string FAILURE_GREETING = "Game Over!\n\nYou only scored %SCORE% and failed to reach the minimum grade to pass.\nMaybe you should %ACTIVITY% more next time.\n";
-        public const string CREDITS_STRING = "Credits\n\n"+PETE1+"\n"+PETE2;
+        public const string SUCCESS_GREETING = 
+            "Congratulations!\n" +
+            "\n" + 
+            "After several months of hard work,\n" +
+            "you were able to finish your thesis!\n" +
+            "\n" + 
+            "Your final grade is...";
+
+        public const string TIP_GREETING = 
+            "\n\n\n\n\n\n\n\n\n" +
+            "TIP: Moms always know best. Make sure to follow her tip!";
+
+        public const string UNDELIVERED_GREETING = 
+            "What a pity!\n" + 
+            "\n" + 
+            "After so much time and work, you were unable to\n" +
+            "deliver your thesis on time. It really is unfortunate...\n" + 
+            "\n" + 
+            "If you had delivered it, your grade would be:";
+
+        public const string CREDITS_STRING = 
+            "Made for 1GAM by:\n" + 
+            PETE1 + "              " + PETE2 + "\n" +
+            "@kaotic4567" + "               " + "@pmhpereira ";
     }
 
     public static class Actions

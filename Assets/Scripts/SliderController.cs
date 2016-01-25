@@ -9,12 +9,9 @@ public class SliderController : MonoBehaviour
     public bool invertRotation;
     public float value;
 
-    private ClockManager clock;
-
     void Awake()
     {
         value = PlayerPrefs.GetFloat("Pointer");
-        clock = GameObject.FindObjectOfType<ClockManager>();
         UpdateSlider(value);
     }
 

@@ -11,8 +11,6 @@ public class CreditsScript : MonoBehaviour {
     private Text grade;
     public float shakeIntensity = 3;
     public float scrollDuration = 3;
-    private bool isShakeRunning = false;
-    private bool namesFading = false;
 
     // Use this for initialization
     void Start () {
@@ -21,8 +19,25 @@ public class CreditsScript : MonoBehaviour {
         creditsText = GetComponent<Text>();
         grade = GameObject.Find("Grade").GetComponent<Text>();
 
-        //grade.text = ""; //bota nota
-        creditsText.text = Constants.Credits.SUCCESS_GREETING;
+        float playerStatus = PlayerPrefs.GetFloat(Constants.Prefs.PLAYER_STATUS, 0);
+        float playerGrade = Mathf.Abs(100 - (50 - playerStatus) * 2);
+
+        grade.text = "[" + LetterGradeFromNumber(playerGrade) + "]";
+
+        if(PlayerPrefs.GetInt(Constants.Prefs.THESIS_DELIVERED, Constants.Prefs.Defaults.THESIS_DELIVERED) == 1)
+        {
+            creditsText.text = Constants.Credits.SUCCESS_GREETING;
+        }
+        else
+        {
+            creditsText.text = Constants.Credits.UNDELIVERED_GREETING;
+        }
+
+        if(grade.text[1].CompareTo('C') >= 0) // less than B-
+        {
+            creditsText.text += Constants.Credits.TIP_GREETING;
+        }
+
         namesText.text = Constants.Credits.CREDITS_STRING;
 
         StartCoroutine(Play());
@@ -34,13 +49,13 @@ public class CreditsScript : MonoBehaviour {
         yield return StartCoroutine(AddStamp(.2f));
         yield return StartCoroutine(ShakeScreen(0.2f, 20));
         yield return StartCoroutine(FadeInNames(2));
-        yield return StartCoroutine(WaitAndLoad(3f));
+        yield return StartCoroutine(WaitAndLoad(5f));
     }
 
     IEnumerator RollCredits(float speed, int steps = 60)
     {
         var step = (Screen.height / steps)/speed;
-        while (transform.position.y < 0)
+        while (transform.position.y < 650)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y + step, transform.position.z);
             yield return null;
@@ -49,7 +64,7 @@ public class CreditsScript : MonoBehaviour {
 
     IEnumerator AddStamp(float duration)
     {
-        float minScale = 1;
+        float minScale = 0.8f;
         float maxScale = 10;
 
         grade.enabled = true;
@@ -67,7 +82,6 @@ public class CreditsScript : MonoBehaviour {
 
     IEnumerator ShakeScreen(float duration, int steps = 60)
     {
-        isShakeRunning = true;
         grade.enabled = true;
         GetComponent<AudioSource>().Play();
         Vector3 initialPos = content.transform.position;
@@ -99,6 +113,62 @@ public class CreditsScript : MonoBehaviour {
         {
             yield return new WaitForSeconds(seconds/steps);
         }
+
+        // TODO: remove saved data
         SceneManager.LoadScene(Constants.Levels.START_MENU);
+    }
+
+    private string LetterGradeFromNumber(float numberGrade) 
+    {
+	    if(numberGrade >= 95) 
+	    {
+		    return "A+";
+	    }
+	    if(numberGrade >= 93) 
+	    {
+		    return "A";
+	    }
+	    if(numberGrade >= 90) 
+	    {
+		    return "A-";
+	    }
+	    if(numberGrade >= 87) 
+	    {
+		    return "B+";
+	    }
+	    if(numberGrade >= 83) 
+	    {
+		    return "B";
+	    }
+	    if(numberGrade >= 80) 
+	    {
+		    return "B-";
+	    }
+	    if(numberGrade >= 77) 
+	    {
+		    return "C+";
+	    }
+	    if(numberGrade >= 73) 
+	    {
+		    return "C";
+	    }
+	    if(numberGrade >= 70) 
+	    {
+		    return "C-";
+	    }
+	    if(numberGrade >= 67) 
+	    {
+		    return "D+";
+	    }
+	    if(numberGrade >= 63) 
+	    {
+		    return "D";
+	    }
+	    if(numberGrade >= 60) 
+	    {
+		    return "D-";
+	    }
+
+	    return "F";
     }
 }

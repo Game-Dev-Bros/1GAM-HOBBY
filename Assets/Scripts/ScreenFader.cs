@@ -7,7 +7,6 @@ public class ScreenFader : MonoBehaviour
 {
     public Image fadeImage;
     public float fadeTime = 1.5f;
-    private float fadeStep = 0;
     public bool isRunning = false;
 
     void Awake()
