@@ -37,4 +37,33 @@
             public const int LAST_ORIENTATION = (int) PlayerController.PlayerOrientation.Down;
         }
     }
+
+    public static class Actions
+    {
+        public const string LOSE_TIME = "LOSE_TIME";
+        public const string USE_BATHROOM = "USE_BATHROOM";
+        public const string SLEEP_NIGHT = "SLEEP_NIGHT";
+        public const string TAKE_NAP = "TAKE_NAP";
+        public const string WRITE_THESIS = "WRITE_THESIS";
+        public const string SUBMIT_THESIS = "SUBMIT_THESIS";
+        public const string PARENTS_BEDROOM = "PARENTS_BEDROOM";
+
+        public const string WATCH_MOVIE = "WATCH_MOVIE";
+        public const string EAT_MEAL = "EAT_MEAL";
+        public const string EAT_SNACK = "EAT_SNACK";
+
+        public static string[] values = new string[]
+        {
+            LOSE_TIME,
+            USE_BATHROOM,
+            SLEEP_NIGHT,
+            TAKE_NAP,
+            WRITE_THESIS,
+            SUBMIT_THESIS,
+            PARENTS_BEDROOM,
+            WATCH_MOVIE,
+            EAT_MEAL,
+            EAT_SNACK
+        };
+    }
 }

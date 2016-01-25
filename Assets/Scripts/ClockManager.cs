@@ -51,20 +51,20 @@ public class ClockManager : MonoBehaviour
             GameOver();
         }
 
-        dayText.text = GetDayFromTime((long)currentGameTime);
-        hourText.text = GetHourFromTime((long)currentGameTime);
+        dayText.text = GetDayFromTimeStringified((long)currentGameTime);
+        hourText.text = GetHourFromTimeStringified((long)currentGameTime);
     }
 
-    private string GetDayFromTime(long time)
+    private string GetDayFromTimeStringified(long time)
     {
         int index = Mathf.FloorToInt(time / (24*60*60));
         return Enum.GetName(typeof(DayOfWeek), index);
     }
 
-    private string GetHourFromTime(long time)
+    private string GetHourFromTimeStringified(long time)
     {
-        int hours = Mathf.FloorToInt(time / (60 * 60)) % 24;
-        int minutes = Mathf.FloorToInt(time / 60) % 60;
+        int hours = GetHours(time);
+        int minutes = GetMinutes(time);
         
         bool am = false;
         if(!use24hour)
@@ -85,6 +85,16 @@ public class ClockManager : MonoBehaviour
         }
 
         return timeString;
+    }
+    
+    public int GetHours(long time)
+    {
+        return Mathf.FloorToInt(time / (60 * 60)) % 24;
+    }
+    
+    public int GetMinutes(long time)
+    {
+        return Mathf.FloorToInt(time / 60) % 60;
     }
 
     void GameOver()
