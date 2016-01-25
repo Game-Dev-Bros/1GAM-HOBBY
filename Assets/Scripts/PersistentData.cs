@@ -3,14 +3,13 @@ using System.Collections;
 
 public class PersistentData : MonoBehaviour
 {
-
-    public bool hasChangedFloors = false;
-
-
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
         GameObject.DontDestroyOnLoad(this.gameObject); //juggernaut, bitch!
     }
 
+    void OnLevelWasLoaded()
+    {
+        GetComponent<GameManager>().Reset();
+    }
 }
