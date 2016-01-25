@@ -46,10 +46,13 @@ public class CreditsScript : MonoBehaviour {
     IEnumerator Play()
     {
         yield return StartCoroutine(RollCredits(scrollDuration));
+        yield return new WaitForSeconds(1);
         yield return StartCoroutine(AddStamp(.2f));
         yield return StartCoroutine(ShakeScreen(0.2f, 20));
+        yield return new WaitForSeconds(1);
         yield return StartCoroutine(FadeInNames(2));
-        yield return StartCoroutine(WaitAndLoad(5f));
+        yield return new WaitForSeconds(5);
+        yield return StartCoroutine(QuitToMainMenu());
     }
 
     IEnumerator RollCredits(float speed, int steps = 60)
@@ -107,15 +110,10 @@ public class CreditsScript : MonoBehaviour {
         }
     }
 
-    IEnumerator WaitAndLoad(float seconds, int steps = 60)
+    IEnumerator QuitToMainMenu()
     {
-        for(int i = 0; i < steps; i++)
-        {
-            yield return new WaitForSeconds(seconds/steps);
-        }
-
-        // TODO: remove saved data
         SceneManager.LoadScene(Constants.Levels.START_MENU);
+        yield return null;
     }
 
     private string LetterGradeFromNumber(float numberGrade) 

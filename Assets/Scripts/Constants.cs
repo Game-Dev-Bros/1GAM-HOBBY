@@ -48,25 +48,25 @@
     {
         public const string PETE1 = "Pedro Lucas";
         public const string PETE2 = "Pedro Pereira";
+
         public const string SUCCESS_GREETING = 
             "Congratulations!\n" +
             "\n" + 
             "After several months of hard work,\n" +
             "you were able to finish your thesis!\n" +
             "\n" + 
-            "Your final grade is...";
-
-        public const string TIP_GREETING = 
-            "\n\n\n\n\n\n\n\n\n" +
-            "TIP: Moms always know best. Make sure to follow her tip!";
-
+            "Your final grade is...\n";
         public const string UNDELIVERED_GREETING = 
             "What a pity!\n" + 
             "\n" + 
             "After so much time and work, you were unable to\n" +
-            "deliver your thesis on time. It really is unfortunate...\n" + 
+            "deliver your thesis on time. Better luck next time.\n" + 
             "\n" + 
-            "If you had delivered it, your grade would be:";
+            "If you had delivered it, your grade would be...\n";
+
+        public const string TIP_GREETING = 
+            "\n\n\n\n\n\n\n\n" +
+            "TIP: Moms always know best. Make sure to follow her tip!";
 
         public const string CREDITS_STRING = 
             "Made for 1GAM by:\n" + 
