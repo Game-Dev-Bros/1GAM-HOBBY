@@ -29,9 +29,22 @@ public class MusicPlayer : MonoBehaviour
             Footsteps.Play();
         }
     }
-
-    public void StopFootsteps()
+    
+    public void StopLoopedFootsteps()
     {
+        Footsteps.loop = false;
+        Footsteps.Stop();
+    }
+
+    public IEnumerator PlayLoopedFootsteps()
+    {
+        while(Footsteps.isPlaying)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        Footsteps.loop = true;
+        Footsteps.Play();
     }
 
     public void PlayInteraction()

@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
         bool hasChangedFloor = PlayerPrefs.GetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR) == 1;
         if (hasChangedFloor)
         {
-            mplayer.StopFootsteps();
+            mplayer.StopLoopedFootsteps();
             transform.position = new Vector3(-0.86f, 3.88f, 0f);
             playerOrientation = PlayerOrientation.Right;
 
@@ -219,9 +219,9 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("walking", walking);
 
         if (walking)
+        {
             mplayer.PlayFootsteps();
-        else
-            mplayer.StopFootsteps();
+        }
 
         transform.position += walkingDirection * (walking ? 1 : 0) * walkingSpeed * Time.deltaTime;
         GetComponent<SpriteRenderer>().sortingOrder = (currentStairs != null) ? currentStairs.playerZOrder : (int)-transform.position.y - 1;
@@ -315,7 +315,6 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadSceneAsync("Pause Menu", LoadSceneMode.Additive);
             Time.timeScale = 0;
             mplayer.SetMusicVolume(mplayer.GetMusicVolume() / 3f);
-            mplayer.StopFootsteps();
         }
         else
         {
@@ -335,11 +334,13 @@ public class PlayerController : MonoBehaviour
 
         if (other.tag == "DownstairsTransition")
         {
+            StartCoroutine(mplayer.PlayLoopedFootsteps());
             PlayerPrefs.SetInt(Constants.Prefs.CHANGING_FLOOR, 1);
             StartCoroutine(screenFader.FadeToScene(Constants.Levels.LEVEL_0));
         }
         else if (other.tag == "UpstairsTransition")
         {
+            StartCoroutine(mplayer.PlayLoopedFootsteps());
             PlayerPrefs.SetInt(Constants.Prefs.CHANGING_FLOOR, 1);
             StartCoroutine(screenFader.FadeToScene(Constants.Levels.LEVEL_1));
         }
