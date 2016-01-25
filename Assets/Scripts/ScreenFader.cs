@@ -37,7 +37,7 @@ public class ScreenFader : MonoBehaviour
         fadeImage.enabled = true;
         fadeImage.color = Color.clear;
 
-        yield return StartCoroutine(FadeToColor(Color.black, fadeTime));
+        yield return StartCoroutine(FadeToColor(Constants.Colors.FADE, fadeTime));
         
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().SavePlayerData();
         SceneManager.LoadScene(sceneName);

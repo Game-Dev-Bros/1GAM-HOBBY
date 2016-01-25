@@ -1,4 +1,6 @@
-﻿public static class Constants
+﻿using UnityEngine;
+
+public static class Constants
 {
     public static class Levels
     {
@@ -101,5 +103,10 @@
             EAT_MEAL,
             EAT_SNACK
         };
+    }
+
+    public static class Colors
+    {
+        public static Color FADE = new Color(.09f, .09f, .09f);
     }
 }
