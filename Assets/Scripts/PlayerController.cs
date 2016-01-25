@@ -308,21 +308,21 @@ public class PlayerController : MonoBehaviour
 
     void TogglePause()
     {
-        if (!isPaused) //global pause
+        if (!isPaused)
         {
-            isPaused = true; //set global pause
+            isPaused = true;
             eventSystem.SetActive(false);
-            SceneManager.LoadScene("Pause Menu", LoadSceneMode.Additive);
-            //SceneManager.SetActiveScene(SceneManager.GetSceneByName("Pause Menu"));
+            SceneManager.LoadSceneAsync("Pause Menu", LoadSceneMode.Additive);
             Time.timeScale = 0;
             mplayer.SetMusicVolume(mplayer.GetMusicVolume() / 3f);
+            mplayer.StopFootsteps();
         }
         else
         {
             isPaused = false;
             SceneManager.UnloadScene("Pause Menu");
-            Time.timeScale = 1;
             eventSystem.SetActive(true);
+            Time.timeScale = 1;
             mplayer.SetMusicVolume(mplayer.GetMusicVolume() * 3f);
         }
     }
