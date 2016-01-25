@@ -40,6 +40,15 @@
         }
     }
 
+    public static class Credits
+    {
+        public const string PETE1 = "Pedro Lucas";
+        public const string PETE2 = "Pedro Pereira";
+        public const string SUCCESS_GREETING = "Congratulations!\n\nYou managed to score %SCORE% this time.\nTry and balance your activities the best you can!\n";
+        public const string FAILURE_GREETING = "Game Over!\n\nYou only scored %SCORE% and failed to reach the minimum grade to pass.\nMaybe you should %ACTIVITY% more next time.\n";
+        public const string CREDITS_STRING = "Credits\n\n"+PETE1+"\n"+PETE2;
+    }
+
     public static class Actions
     {
         public const string LOSE_TIME = "LOSE_TIME";
