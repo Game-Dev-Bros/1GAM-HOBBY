@@ -8,21 +8,12 @@ public class MusicPlayer : MonoBehaviour
     public AudioSource MpPlayer;
     public AudioSource Footsteps;
     public AudioSource Interaction;
-    //public AudioClip BGM;
-    // Use this for initialization
-    void Start()
-    {
-        //MpPlayer.clip = BGM;
-        MpPlayer.loop = false;
-        MpPlayer.Play();
-    }
 
-    IEnumerator WaitForTrackTOendAndPlay(AudioClip toPlay)
+    IEnumerator WaitForTrackToEndAndPlay(AudioClip toPlay)
     {
         while (MpPlayer.isPlaying)
             yield return new WaitForSeconds(0.01f);
         MpPlayer.clip = toPlay;
-        MpPlayer.loop = false;
         MpPlayer.Play();
     }
 
@@ -35,17 +26,12 @@ public class MusicPlayer : MonoBehaviour
     {
         if (!Footsteps.isPlaying)
         {
-            Footsteps.loop = true;
             Footsteps.Play();
         }
     }
 
     public void StopFootsteps()
     {
-        if (Footsteps.isPlaying)
-        {
-            Footsteps.Stop();
-        }
     }
 
     public void PlayInteraction()
@@ -56,7 +42,6 @@ public class MusicPlayer : MonoBehaviour
             Interaction.Play();
         }
     }
-
 
     public void SetMusicVolume(float vol)
     {
