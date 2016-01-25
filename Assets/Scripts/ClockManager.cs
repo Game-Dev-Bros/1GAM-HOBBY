@@ -27,14 +27,14 @@ public class ClockManager : MonoBehaviour
 
     void Awake()
     {
-        if (PlayerPrefs.GetFloat("Time") == 0)
+        if (PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME) == 0)
         {
             currentGameTime = ((int)DayOfWeek.Friday - totalGameDays + 1) * 24 * 60 * 60;
             maxGameTime = (long)currentGameTime + totalGameDays * 24 * 60 * 60 - 1; // 11:59pm @ Friday
             currentGameTime += 8 * 60 * 60; // 8am @ starting day;
         }
         else {
-            currentGameTime = PlayerPrefs.GetFloat("Time");
+            currentGameTime = PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME);
             maxGameTime = (long)currentGameTime + totalGameDays * 24 * 60 * 60 - 1; // 11:59pm @ Friday
         }
     }

@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Zones/House/Level 1.unity
   - enabled: 1
     path: Assets/Scenes/Pause Menu.unity
+  - enabled: 1
+    path: Assets/Scenes/Start Menu.unity

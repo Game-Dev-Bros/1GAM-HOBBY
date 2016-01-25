@@ -26,6 +26,11 @@ public class MusicPlayer : MonoBehaviour
         MpPlayer.Play();
     }
 
+    public void StopMusic()
+    {
+        MpPlayer.Stop();
+    }
+
     public void PlayFootsteps()
     {
         if (!Footsteps.isPlaying)
