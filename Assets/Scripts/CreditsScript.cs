@@ -10,6 +10,7 @@ public class CreditsScript : MonoBehaviour {
     private GameObject content;
     private Text grade;
     public float shakeIntensity = 3;
+    public float scrollDuration = 3;
     private bool isShakeRunning = false, namesFading = false;
 
     // Use this for initialization
@@ -29,15 +30,15 @@ public class CreditsScript : MonoBehaviour {
 
     IEnumerator Play()
     {
-        yield return StartCoroutine(RollCredits(3));
+        yield return StartCoroutine(RollCredits(scrollDuration));
         yield return StartCoroutine(ShakeScreen(0.2f, 20));
         StartCoroutine(FadeInNames(2));
     }
 
-    IEnumerator RollCredits(float duration, int steps = 60)
+    IEnumerator RollCredits(float speed, int steps = 60)
     {
         //var h = gameObject.GetComponent<RectTransform>();
-        var step = (300 / steps)/duration;
+        var step = (Screen.height / steps)/speed;
         while (transform.position.y < 0)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y + step, transform.position.z);
@@ -49,6 +50,7 @@ public class CreditsScript : MonoBehaviour {
     {
         isShakeRunning = true;
         grade.enabled = true;
+        GetComponent<AudioSource>().Play();
         Vector3 initialPos = content.transform.position;
         for (int i = 0; i < steps; i++)
         {
