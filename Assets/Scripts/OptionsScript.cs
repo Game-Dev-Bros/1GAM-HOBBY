@@ -42,12 +42,17 @@ public class OptionsScript : MonoBehaviour {
         AudioListener.volume = value;
         PlayerPrefs.SetFloat(Constants.Prefs.VOLUME, value);
     }
-
+    
     public void ReturnToMainMenu()
     {
         mplayer.StopMusic();
         Time.timeScale = 1;
         Destroy(GameObject.Find("PersistentDataObject"));
         SceneManager.LoadScene(Constants.Levels.START_MENU);
+    }
+
+    public void ResumeGame()
+    {
+        GameObject.FindObjectOfType<PlayerController>().TogglePause();
     }
 }

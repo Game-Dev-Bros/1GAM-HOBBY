@@ -123,7 +123,6 @@ public class PlayerController : MonoBehaviour
         {
             TogglePause();
         }
-
     }
 
     void UpdatePlayer()
@@ -300,7 +299,7 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    void TogglePause()
+    public void TogglePause()
     {
         if (!isPaused)
         {
