@@ -30,23 +30,21 @@ public class ClockManager : MonoBehaviour
         if (PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME) == 0)
         {
             currentGameTime = ((int)DayOfWeek.Friday - totalGameDays + 1) * 24 * 60 * 60;
-            maxGameTime = (long)currentGameTime + totalGameDays * 24 * 60 * 60 - 1; // 11:59pm @ Friday
             currentGameTime += 8 * 60 * 60; // 8am @ starting day;
         }
         else {
             currentGameTime = PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME);
-            maxGameTime = (long)currentGameTime + totalGameDays * 24 * 60 * 60 - 1; // 11:59pm @ Friday
         }
+
+        maxGameTime = (long)(DayOfWeek.Friday + 1) * 24 * 60 * 60 - 1; // 11:59pm @ Friday
     }
 
     void Update()
     {
-        if (!isFinished)
-        {
-            currentGameTime += Time.deltaTime * minutesPerSecond * 60;
-        }
+        currentGameTime += Time.deltaTime * minutesPerSecond * 60;
+        currentGameTime = Mathf.Min(currentGameTime, maxGameTime);
 
-        if(currentGameTime > maxGameTime && !isFinished)
+        if(currentGameTime >= maxGameTime && !isFinished)
         {
             GameOver();
         }
@@ -102,10 +100,14 @@ public class ClockManager : MonoBehaviour
         return Mathf.FloorToInt(time / (24*60*60));
     }
 
-    void GameOver()
+    public void AddMinutes(int minutes)
     {
-        currentGameTime = maxGameTime;
+        currentGameTime += minutes * 60;
+    }
+
+    public void GameOver()
+    {
         isFinished = true;
-        Debug.Log("Game over!");
+        StartCoroutine(GameObject.FindObjectOfType<GameManager>().EndGame(false));
     }
 }

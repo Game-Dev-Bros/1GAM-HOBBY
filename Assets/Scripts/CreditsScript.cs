@@ -12,8 +12,8 @@ public class CreditsScript : MonoBehaviour {
     public float shakeIntensity = 3;
     public float scrollDuration = 3;
 
-    // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         content = GameObject.Find("Content");
         namesText = GameObject.Find("Names").GetComponent<Text>();
         creditsText = GetComponent<Text>();
@@ -24,7 +24,7 @@ public class CreditsScript : MonoBehaviour {
 
         grade.text = "[" + LetterGradeFromNumber(playerGrade) + "]";
 
-        if(PlayerPrefs.GetInt(Constants.Prefs.THESIS_DELIVERED, Constants.Prefs.Defaults.THESIS_DELIVERED) == 1)
+        if(PlayerPrefs.GetInt(Constants.Prefs.THESIS_SUBMITTED, Constants.Prefs.Defaults.THESIS_DELIVERED) == 1)
         {
             creditsText.text = Constants.Credits.SUCCESS_GREETING;
         }

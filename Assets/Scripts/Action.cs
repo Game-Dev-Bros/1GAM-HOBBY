@@ -8,6 +8,6 @@ public class Action
     public bool active = true;
     public string text;
     public string tag;
-    public float duration;
+    public int duration;
     public float statModifier;
 }

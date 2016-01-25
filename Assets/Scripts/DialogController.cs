@@ -9,7 +9,7 @@ public class DialogController : MonoBehaviour
     public Image button;
     public Text buttonText;
 
-    private Action currentAction;
+    public Action currentAction;
 
     private bool isVisible;
 

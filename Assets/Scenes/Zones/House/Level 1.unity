@@ -21707,13 +21707,13 @@ MonoBehaviour:
     active: 0
     text: Sleep for the night
     tag: SLEEP_NIGHT
-    duration: 8
+    duration: 480
     statModifier: 0
   - interactable: 1
     active: 0
     text: Take a nap
     tag: TAKE_NAP
-    duration: 1.5
+    duration: 90
     statModifier: 0
 --- !u!61 &1036902384
 BoxCollider2D:
@@ -22751,7 +22751,7 @@ MonoBehaviour:
     active: 1
     text: Watch time fly
     tag: LOSE_TIME
-    duration: 1
+    duration: 30
     statModifier: 0
 --- !u!61 &1090713789
 BoxCollider2D:
@@ -24578,7 +24578,7 @@ MonoBehaviour:
     active: 1
     text: Write my thesis
     tag: WRITE_THESIS
-    duration: 2.5
+    duration: 150
     statModifier: 0
   - interactable: 1
     active: 0

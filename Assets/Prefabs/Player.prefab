@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointer: {fileID: 0}
+  moveSpeed: 0.6
   minValue: 0
   maxValue: 100
   minAngle: -65
@@ -419,6 +420,13 @@ MonoBehaviour:
   dialogText: {fileID: 11465842}
   button: {fileID: 11436144}
   buttonText: {fileID: 11497552}
+  currentAction:
+    interactable: 1
+    active: 1
+    text: 
+    tag: 
+    duration: 0
+    statModifier: 0
 --- !u!114 &11497552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -626,6 +634,10 @@ Prefab:
       propertyPath: prefab
       value: 
       objectReference: {fileID: 101398, guid: 0591e51fdf76b2d41b4fbe8a3d763892, type: 2}
+    - target: {fileID: 0}
+      propertyPath: moveSpeed
+      value: 0.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 164802}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     private ClockManager clock;
     private PlayerController player;
+    private SliderController status;
 
     void Awake()
     {
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour
         StopAllCoroutines();
 
         player = GameObject.FindObjectOfType<PlayerController>();
+        status = GameObject.FindObjectOfType<SliderController>();
         clock = GameObject.FindObjectOfType<ClockManager>();
 
         SetupActions();
@@ -100,5 +103,17 @@ public class GameManager : MonoBehaviour
         {
             action.active = active;
         }
+    }
+
+    public IEnumerator EndGame(bool submitted)
+    {
+        ScreenFader fader = GameObject.FindObjectOfType<ScreenFader>();
+        PlayerPrefs.SetInt(Constants.Prefs.THESIS_SUBMITTED, submitted ? 1 : 0);
+        PlayerPrefs.SetFloat(Constants.Prefs.PLAYER_STATUS, status.value);
+
+        yield return fader.FadeToColor(Constants.Colors.FADE, .5f);
+        SceneManager.LoadScene(Constants.Levels.CREDITS);
+
+        yield return null;
     }
 }

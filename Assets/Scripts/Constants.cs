@@ -8,6 +8,7 @@ public static class Constants
         public const string LEVEL_0 = "Level 0";
         public const string LEVEL_1 = "Level 1";
         public const string PAUSE_MENU = "Pause Menu";
+        public const string CREDITS = "Credits";
     }
 
     public static class Prefs
@@ -25,7 +26,7 @@ public static class Constants
         public const string LAST_POSITION_Y = "LastPositionY";
         public const string LAST_ORIENTATION = "LastOrientation";
 
-        public const string THESIS_DELIVERED = "ThesisDelivered";
+        public const string THESIS_SUBMITTED = "ThesisDelivered";
 
         public static class Defaults
         {
@@ -55,14 +56,15 @@ public static class Constants
             "Congratulations!\n" +
             "\n" + 
             "After several months of hard work,\n" +
-            "you were able to finish your thesis!\n" +
+            "you were able to submit your thesis!\n" +
             "\n" + 
             "Your final grade is...\n";
+
         public const string UNDELIVERED_GREETING = 
             "What a pity!\n" + 
             "\n" + 
             "After so much time and work, you were unable to\n" +
-            "deliver your thesis on time. Better luck next time.\n" + 
+            "submit your thesis on time. Better luck next time.\n" + 
             "\n" + 
             "If you had delivered it, your grade would be...\n";
 

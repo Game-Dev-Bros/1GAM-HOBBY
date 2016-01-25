@@ -17,7 +17,7 @@ public class ScreenFader : MonoBehaviour
         StartCoroutine(FadeToColor(Color.clear, fadeTime));
     }
 
-    IEnumerator FadeToColor(Color endColor, float fadeTime, int steps = 60)
+    public IEnumerator FadeToColor(Color endColor, float fadeTime, int steps = 60)
     {
         isRunning = true;
 

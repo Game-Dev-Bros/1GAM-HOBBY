@@ -112,10 +112,9 @@ public class PlayerController : MonoBehaviour
                 playerOrientation = PlayerOrientation.Right;
             }
 
-            if (Input.GetButton("Action") && interactiveObject != null)
+            if (Input.GetButtonDown("Action") && interactiveObject != null)
             {
-                mplayer.PlayInteraction();
-                interacting = true;
+                StartCoroutine(Interact());
             }
         }
 
@@ -123,6 +122,37 @@ public class PlayerController : MonoBehaviour
         {
             TogglePause();
         }
+    }
+
+    IEnumerator Interact()
+    {
+        Action action = dialogController.currentAction;
+
+        if(interactiveObject != null && action != null && action.active && action.interactable)
+        {
+            interacting = true;
+            mplayer.PlayInteraction();
+        
+            walking = false;
+            animator.SetBool("walking", walking);
+
+            if(action.tag == Constants.Actions.SUBMIT_THESIS)
+            {
+                yield return GameObject.FindObjectOfType<GameManager>().EndGame(true);
+            }
+            else
+            {
+                yield return screenFader.FadeToColor(Constants.Colors.FADE, 0.25f);
+                pointer.value += action.statModifier;
+                clock.AddMinutes(action.duration);
+                yield return screenFader.FadeToColor(Color.clear, 0.25f);
+            }
+
+        }
+
+        interacting = false;
+
+        yield return null;
     }
 
     void UpdatePlayer()
