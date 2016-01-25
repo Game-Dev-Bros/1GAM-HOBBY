@@ -75,12 +75,20 @@ public class GameManager : MonoBehaviour
 
         Action action;
         action = GetActionWithTag(Constants.Actions.SLEEP_NIGHT);
-        action.active = (hour >= 23 && hour < 3);
+        SetAction(action, (hour >= 23 && hour < 3));
         
         action = GetActionWithTag(Constants.Actions.TAKE_NAP);
-        action.active = (hour >= 14 && hour < 19);
+        SetAction(action, (hour >= 14 && hour < 19));
 
         yield return new WaitForEndOfFrame();
         yield return StartCoroutine(UpdateInteractions());
+    }
+
+    void SetAction(Action action, bool active)
+    {
+        if(action != null)
+        {
+            action.active = active;
+        }
     }
 }
