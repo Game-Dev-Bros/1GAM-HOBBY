@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+using System.Collections;
 using UnityEditor;
 #endif
 using UnityEngine;
@@ -7,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     private Animator animator;
-
-    private bool walking;
+    private GameObject eventSystem;
+    private bool walking, isPaused;
     private MusicPlayer mplayer;
     private Vector3 walkingDirection;
     public int walkingSpeed;
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        eventSystem = GameObject.Find("EventSystem");
         mplayer = GameObject.Find("PersistentDataObject").GetComponent<MusicPlayer>();
         clock = GameObject.Find("Clock").GetComponent<ClockManager>();
         pointer = GetComponent<SliderController>();
@@ -73,44 +75,61 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
         ProcessInput();
-        UpdatePlayer();
+        if (!isPaused)
+            UpdatePlayer();
     }
+
+
+    bool paused = false;
 
     void ProcessInput()
     {
         walking = false;
 
-        if (Input.GetButton("MoveUp"))
+        if (!isPaused)
         {
-            walking = true;
-            playerOrientation = PlayerOrientation.Up;
+            if (Input.GetButton("MoveUp"))
+            {
+                walking = true;
+                playerOrientation = PlayerOrientation.Up;
+            }
+
+            if (Input.GetButton("MoveDown"))
+            {
+                walking = true;
+                playerOrientation = PlayerOrientation.Down;
+            }
+
+            if (Input.GetButton("MoveLeft"))
+            {
+                walking = true;
+                playerOrientation = PlayerOrientation.Left;
+            }
+
+            if (Input.GetButton("MoveRight"))
+            {
+                walking = true;
+                playerOrientation = PlayerOrientation.Right;
+            }
+
+            if (Input.GetButton("Action") && interactiveObject != null)
+            {
+                mplayer.PlayInteraction();
+                interacting = true;
+            }
         }
 
-        if (Input.GetButton("MoveDown"))
+        if (Input.GetButtonDown("Pause"))
         {
-            walking = true;
-            playerOrientation = PlayerOrientation.Down;
+            TogglePause();
         }
 
-        if (Input.GetButton("MoveLeft"))
-        {
-            walking = true;
-            playerOrientation = PlayerOrientation.Left;
-        }
-
-        if (Input.GetButton("MoveRight"))
-        {
-            walking = true;
-            playerOrientation = PlayerOrientation.Right;
-        }
-
-        if(Input.GetButton("Action") && interactiveObject != null)
-        {
-            mplayer.PlayInteraction();
-            interacting = true;
-        }
     }
+
+    
+
 
     void UpdatePlayer()
     {
@@ -285,6 +304,29 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetInt(Constants.Prefs.LAST_ORIENTATION, (int)playerOrientation);
         PlayerPrefs.Save();
     }
+    
+
+    void TogglePause()
+    {
+        if (!isPaused) //global pause
+        {
+            isPaused = true; //set global pause
+            eventSystem.SetActive(false);
+            SceneManager.LoadScene("Pause Menu", LoadSceneMode.Additive);
+            //SceneManager.SetActiveScene(SceneManager.GetSceneByName("Pause Menu"));
+            Time.timeScale = 0;
+            mplayer.SetMusicVolume(mplayer.GetMusicVolume() / 3f);
+        }
+        else
+        {
+            isPaused = false;
+            SceneManager.UnloadScene("Pause Menu");
+            Time.timeScale = 1;
+            eventSystem.SetActive(true);
+            mplayer.SetMusicVolume(mplayer.GetMusicVolume() * 3f);
+        }
+    }
+
 
     public void OnTriggerEnter2D(Collider2D other)
     {

@@ -53,6 +53,16 @@ public class MusicPlayer : MonoBehaviour
     }
 
 
+    public void SetMusicVolume(float vol)
+    {
+        MpPlayer.volume = vol;
+    }
+
+    public float GetMusicVolume()
+    {
+        return MpPlayer.volume;
+    }
+
     public IEnumerator FadeToVolume(float volume, float fadeTime, int steps = 60)
     {
         float dif = Math.Abs(MpPlayer.volume - volume);
