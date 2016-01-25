@@ -57,7 +57,7 @@ public class ClockManager : MonoBehaviour
 
     private string GetDayFromTimeStringified(long time)
     {
-        int index = Mathf.FloorToInt(time / (24*60*60));
+        int index = GetDays(time);
         return Enum.GetName(typeof(DayOfWeek), index);
     }
 
@@ -95,6 +95,11 @@ public class ClockManager : MonoBehaviour
     public int GetMinutes(long time)
     {
         return Mathf.FloorToInt(time / 60) % 60;
+    }
+
+    public int GetDays(long time)
+    {
+        return Mathf.FloorToInt(time / (24*60*60));
     }
 
     void GameOver()

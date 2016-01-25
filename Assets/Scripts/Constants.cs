@@ -30,7 +30,7 @@
 
             public const int CHANGING_FLOOR = 0;
             public const int GAME_TIME = 0;
-            public const float PLAYER_STATUS = 50;
+            public const float PLAYER_STATUS = 45;
             public const string LAST_ACTIVITIES = "";
 
             public const string LAST_LEVEL = Levels.LEVEL_0;

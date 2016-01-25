@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator UpdateInteractions()
     {
+        int day = clock.GetDays((long) clock.currentGameTime);
         int hour = clock.GetHours((long) clock.currentGameTime);
         int minutes = clock.GetMinutes((long) clock.currentGameTime);
 
@@ -82,6 +83,12 @@ public class GameManager : MonoBehaviour
         
         action = GetActionWithTag(Constants.Actions.TAKE_NAP);
         SetAction(action, (hour >= 14 && hour < 19));
+        
+        action = GetActionWithTag(Constants.Actions.WRITE_THESIS);
+        SetAction(action, !(day == (int) ClockManager.DayOfWeek.Friday && hour >= 18));
+        
+        action = GetActionWithTag(Constants.Actions.SUBMIT_THESIS);
+        SetAction(action, (day == (int) ClockManager.DayOfWeek.Friday && hour >= 18));
 
         yield return new WaitForEndOfFrame();
         yield return StartCoroutine(UpdateInteractions());
