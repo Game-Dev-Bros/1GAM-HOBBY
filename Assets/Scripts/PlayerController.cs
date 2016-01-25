@@ -75,14 +75,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
         ProcessInput();
         if (!isPaused)
+        {
             UpdatePlayer();
+        }
     }
-
-
-    bool paused = false;
 
     void ProcessInput()
     {
@@ -127,9 +125,6 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
-    
-
 
     void UpdatePlayer()
     {
@@ -304,7 +299,6 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetInt(Constants.Prefs.LAST_ORIENTATION, (int)playerOrientation);
         PlayerPrefs.Save();
     }
-    
 
     void TogglePause()
     {
@@ -312,20 +306,17 @@ public class PlayerController : MonoBehaviour
         {
             isPaused = true;
             eventSystem.SetActive(false);
-            SceneManager.LoadSceneAsync("Pause Menu", LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync(Constants.Levels.PAUSE_MENU, LoadSceneMode.Additive);
             Time.timeScale = 0;
-            mplayer.SetMusicVolume(mplayer.GetMusicVolume() / 3f);
         }
         else
         {
             isPaused = false;
-            SceneManager.UnloadScene("Pause Menu");
+            SceneManager.UnloadScene(Constants.Levels.PAUSE_MENU);
             eventSystem.SetActive(true);
             Time.timeScale = 1;
-            mplayer.SetMusicVolume(mplayer.GetMusicVolume() * 3f);
         }
     }
-
 
     public void OnTriggerEnter2D(Collider2D other)
     {

@@ -23,7 +23,10 @@ public class GameManager : MonoBehaviour
 
         SetupActions();
         
-        StartCoroutine(UpdateInteractions());
+        if(actions.Count > 0)
+        {
+            StartCoroutine(UpdateInteractions());
+        }
     }
 
     private void SetupActions()

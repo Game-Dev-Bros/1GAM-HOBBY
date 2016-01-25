@@ -13,6 +13,8 @@ public class MainMenuScript : MonoBehaviour
     {
         bool hasSavedGame = (PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME, Constants.Prefs.Defaults.GAME_TIME) > 0);
         continueButton.interactable = hasSavedGame;
+        
+        AudioListener.volume = PlayerPrefs.GetFloat(Constants.Prefs.VOLUME, Constants.Prefs.Defaults.VOLUME);
 
         ShowMain();
     }
@@ -60,7 +62,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void UpdateVolume()
     {
-        // TODO: update audio source
+        AudioListener.volume = volume.value;
         PlayerPrefs.SetFloat(Constants.Prefs.VOLUME, volume.value);
     }
 }

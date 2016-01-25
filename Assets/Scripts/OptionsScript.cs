@@ -39,7 +39,6 @@ public class OptionsScript : MonoBehaviour {
 
     public void ChangeVolume(float value)
     {
-        Debug.Log(value);
         AudioListener.volume = value;
         PlayerPrefs.SetFloat(Constants.Prefs.VOLUME, value);
     }
@@ -47,6 +46,8 @@ public class OptionsScript : MonoBehaviour {
     public void ReturnToMainMenu()
     {
         mplayer.StopMusic();
-        SceneManager.LoadScene("Start Menu");
+        Time.timeScale = 1;
+        Destroy(GameObject.Find("PersistentDataObject"));
+        SceneManager.LoadScene(Constants.Levels.START_MENU);
     }
 }

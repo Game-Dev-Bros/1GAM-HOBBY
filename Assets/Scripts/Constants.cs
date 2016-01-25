@@ -2,8 +2,10 @@
 {
     public static class Levels
     {
+        public const string START_MENU = "Start Menu";
         public const string LEVEL_0 = "Level 0";
         public const string LEVEL_1 = "Level 1";
+        public const string PAUSE_MENU = "Pause Menu";
     }
 
     public static class Prefs
