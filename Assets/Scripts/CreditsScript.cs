@@ -9,11 +9,14 @@ public class CreditsScript : MonoBehaviour {
     private Text namesText;
     private GameObject content;
     private Text grade;
+    private MusicPlayer mplayer;
     public float shakeIntensity = 3;
     public float scrollDuration = 3;
 
     void Start ()
     {
+        mplayer = GameObject.Find(Constants.Game.PERSISTENT_OBJECT).GetComponent<MusicPlayer>();
+        mplayer.SetMusicVolume(0.2f);
         content = GameObject.Find("Content");
         namesText = GameObject.Find("Names").GetComponent<Text>();
         creditsText = GetComponent<Text>();

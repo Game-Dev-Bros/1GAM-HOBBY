@@ -111,4 +111,9 @@ public static class Constants
     {
         public static Color FADE = new Color(.09f, .09f, .09f);
     }
+
+    public static class Game
+    {
+        public static string PERSISTENT_OBJECT = "PersistentDataObject";
+    }
 }
