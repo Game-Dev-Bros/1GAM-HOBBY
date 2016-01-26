@@ -115,5 +115,6 @@ public static class Constants
     public static class Game
     {
         public static string PERSISTENT_OBJECT = "PersistentDataObject";
+        public static string FADER_OBJECT = "Fader";
     }
 }

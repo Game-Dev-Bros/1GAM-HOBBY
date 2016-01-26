@@ -24,9 +24,11 @@ public class ClockManager : MonoBehaviour
     public Text dayText;
     public Text hourText;
     private bool isFinished;
+    private bool paused;
 
     void Awake()
     {
+        paused = false;
         if (PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME) == 0)
         {
             currentGameTime = ((int)DayOfWeek.Friday - totalGameDays + 1) * 24 * 60 * 60;
@@ -43,16 +45,19 @@ public class ClockManager : MonoBehaviour
 
     void Update()
     {
-        currentGameTime += Time.deltaTime * minutesPerSecond * 60;
-        currentGameTime = Mathf.Min(currentGameTime, maxGameTime);
-
-        if(currentGameTime >= maxGameTime && !isFinished)
+        if (!paused)
         {
-            GameOver();
-        }
+            currentGameTime += Time.deltaTime * minutesPerSecond * 60;
+            currentGameTime = Mathf.Min(currentGameTime, maxGameTime);
 
-        dayText.text = GetDayFromTimeStringified((long)currentGameTime);
-        hourText.text = GetHourFromTimeStringified((long)currentGameTime);
+            if (currentGameTime >= maxGameTime && !isFinished)
+            {
+                GameOver();
+            }
+
+            dayText.text = GetDayFromTimeStringified((long)currentGameTime);
+            hourText.text = GetHourFromTimeStringified((long)currentGameTime);
+        }
     }
 
     private string GetDayFromTimeStringified(long time)
@@ -105,6 +110,21 @@ public class ClockManager : MonoBehaviour
     public void AddMinutes(int minutes)
     {
         currentGameTime += minutes * 60;
+    }
+
+    public void Pause()
+    {
+        paused = true;
+    }
+
+    public void Resume()
+    {
+        paused = false;
+    }
+
+    public int GetRemainingDays()
+    {
+        return totalGameDays - GetDays((long)currentGameTime);
     }
 
     public void GameOver()
