@@ -17,6 +17,8 @@ public static class Constants
         public const string VOLUME = "Volume";
 
         public const string CHANGING_FLOOR = "ChangingFloor";
+        public const string FORCE_SLEEPING = "ForceSleeping";
+
         public const string GAME_TIME = "Time";
         public const string PLAYER_STATUS = "Pointer";
         public const string LAST_ACTIVITIES = "LastActivities";
@@ -34,6 +36,8 @@ public static class Constants
             public const float VOLUME = 1;
 
             public const int CHANGING_FLOOR = 0;
+            public const int FORCE_SLEEPING = 0;
+
             public const int GAME_TIME = 0;
             public const float PLAYER_STATUS = 45;
             public const string LAST_ACTIVITIES = "";

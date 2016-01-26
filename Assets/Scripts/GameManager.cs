@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(UpdateInteractions());
         }
     }
-
+    
     private void SetupActions()
     {
         actions = new List<Action>();
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private Action GetActionWithTag(string tag)
+    public Action GetActionWithTag(string tag)
     {
         foreach(Action action in actions)
         {
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
 
         Action action;
         action = GetActionWithTag(Constants.Actions.SLEEP_NIGHT);
-        SetAction(action, (hour >= 23 && hour < 3));
+        SetAction(action, (hour >= 23 && hour < 8));
         
         action = GetActionWithTag(Constants.Actions.TAKE_NAP);
         SetAction(action, (hour >= 14 && hour < 19));

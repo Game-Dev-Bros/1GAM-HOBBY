@@ -24,6 +24,8 @@ public class MainMenuScript : MonoBehaviour
         PlayerPrefs.SetFloat(Constants.Prefs.GAME_TIME, Constants.Prefs.Defaults.GAME_TIME);
         PlayerPrefs.SetFloat(Constants.Prefs.PLAYER_STATUS, Constants.Prefs.Defaults.PLAYER_STATUS);
         PlayerPrefs.SetString(Constants.Prefs.LAST_ACTIVITIES, Constants.Prefs.Defaults.LAST_ACTIVITIES);
+        PlayerPrefs.SetInt(Constants.Prefs.FORCE_SLEEPING, Constants.Prefs.Defaults.FORCE_SLEEPING);
+        PlayerPrefs.SetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR);
         PlayerPrefs.Save();
     }
 

@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
     private ClockManager clock;
     private SliderController pointer;
     private ScreenFader screenFader;
+    private GameManager gameManager;
+
+    private bool isForceSleeping;
 
     void Awake()
     {
@@ -43,8 +46,11 @@ public class PlayerController : MonoBehaviour
         clock = GameObject.Find("Clock").GetComponent<ClockManager>();
         pointer = GetComponent<SliderController>();
         animator = GetComponent<Animator>();
+        gameManager = FindObjectOfType<GameManager>();
         dialogController.gameObject.SetActive(true);
         playerOrientation = PlayerOrientation.Down;
+        
+        isForceSleeping = (PlayerPrefs.GetInt(Constants.Prefs.FORCE_SLEEPING, Constants.Prefs.Defaults.FORCE_SLEEPING) == 1);
 
         bool hasSavedGame = (PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME, Constants.Prefs.Defaults.GAME_TIME) > 0);
         if(hasSavedGame)
@@ -53,7 +59,13 @@ public class PlayerController : MonoBehaviour
         }
 
         bool hasChangedFloor = PlayerPrefs.GetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR) == 1;
-        if (hasChangedFloor)
+        if(isForceSleeping)
+        {
+            isForceSleeping = false;
+            PlayerPrefs.SetInt(Constants.Prefs.FORCE_SLEEPING, Constants.Prefs.Defaults.FORCE_SLEEPING);
+            SavePlayerData();
+        }
+        else if (hasChangedFloor)
         {
             mplayer.StopLoopedFootsteps();
             transform.position = new Vector3(-0.86f, 3.88f, 0f);
@@ -79,6 +91,7 @@ public class PlayerController : MonoBehaviour
         if (!isPaused)
         {
             UpdatePlayer();
+            StartCoroutine(CheckSleep());
         }
     }
 
@@ -128,7 +141,7 @@ public class PlayerController : MonoBehaviour
     {
         Action action = dialogController.currentAction;
 
-        if(interactiveObject != null && action != null && action.active && action.interactable)
+        if(action != null && action.active && action.interactable)
         {
             interacting = true;
             mplayer.PlayInteraction();
@@ -157,7 +170,7 @@ public class PlayerController : MonoBehaviour
 
     void UpdatePlayer()
     {
-        if (screenFader.isRunning)
+        if (screenFader.isRunning || isForceSleeping)
         {
             return;
         }
@@ -250,6 +263,41 @@ public class PlayerController : MonoBehaviour
         transform.position += walkingDirection * (walking ? 1 : 0) * walkingSpeed * Time.deltaTime;
         GetComponent<SpriteRenderer>().sortingOrder = (currentStairs != null) ? currentStairs.playerZOrder : (int)-transform.position.y - 1;
     }
+
+    IEnumerator CheckSleep()
+    {
+        if (screenFader.isRunning || isForceSleeping)
+        {
+            yield return null;
+        }
+        else
+        {
+            int hour = clock.GetHours((long) clock.currentGameTime);
+            if(hour >= 3 && hour < 8 && !isForceSleeping)
+            {
+                isForceSleeping = true;
+
+                yield return StartCoroutine(screenFader.FadeToColor(Constants.Colors.FADE, .5f));
+                Action action = gameManager.GetActionWithTag(Constants.Actions.SLEEP_NIGHT);
+                pointer.value += action.statModifier;
+                clock.AddMinutes(action.duration);
+
+                SavePlayerData();
+
+                playerOrientation = PlayerOrientation.Down;
+                walking = false;
+
+                animator.SetBool("up", playerOrientation == PlayerOrientation.Up);
+                animator.SetBool("down", playerOrientation == PlayerOrientation.Down);
+                animator.SetBool("left", playerOrientation == PlayerOrientation.Left);
+                animator.SetBool("right", playerOrientation == PlayerOrientation.Right);
+                animator.SetBool("walking", walking);
+
+                SceneManager.LoadScene(Constants.Levels.LEVEL_1);
+                isForceSleeping = false;
+            }
+        }
+    }
     
     public void SetStairs(StairsController stairs)
     {
@@ -300,17 +348,21 @@ public class PlayerController : MonoBehaviour
 
     public void LoadPlayerData()
     {
-        Vector2 newPosition = Vector2.zero;
 
         clock.use24hour = PlayerPrefs.GetInt(Constants.Prefs.USE_24_HOUR_CLOCK, Constants.Prefs.Defaults.USE_24_HOUR_CLOCK) == 1;
         clock.currentGameTime = PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME, Constants.Prefs.Defaults.GAME_TIME);
         pointer.value = PlayerPrefs.GetFloat(Constants.Prefs.PLAYER_STATUS, Constants.Prefs.Defaults.PLAYER_STATUS);
 
-        newPosition.x = PlayerPrefs.GetFloat(Constants.Prefs.LAST_POSITION_X, Constants.Prefs.Defaults.LAST_POSITION_X);
-        newPosition.y = PlayerPrefs.GetFloat(Constants.Prefs.LAST_POSITION_Y, Constants.Prefs.Defaults.LAST_POSITION_Y);
-        transform.position = newPosition;
+        if(!isForceSleeping)
+        {
+            Vector2 newPosition = Vector2.zero;
+            newPosition.x = PlayerPrefs.GetFloat(Constants.Prefs.LAST_POSITION_X, Constants.Prefs.Defaults.LAST_POSITION_X);
+            newPosition.y = PlayerPrefs.GetFloat(Constants.Prefs.LAST_POSITION_Y, Constants.Prefs.Defaults.LAST_POSITION_Y);
+            transform.position = newPosition;
 
-        playerOrientation = (PlayerOrientation) PlayerPrefs.GetInt(Constants.Prefs.LAST_ORIENTATION, Constants.Prefs.Defaults.LAST_ORIENTATION);
+            playerOrientation = (PlayerOrientation) PlayerPrefs.GetInt(Constants.Prefs.LAST_ORIENTATION, Constants.Prefs.Defaults.LAST_ORIENTATION);
+        }
+
         animator.SetBool("up", playerOrientation == PlayerOrientation.Up);
         animator.SetBool("down", playerOrientation == PlayerOrientation.Down);
         animator.SetBool("left", playerOrientation == PlayerOrientation.Left);
@@ -326,6 +378,7 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetFloat(Constants.Prefs.LAST_POSITION_X, transform.position.x);
         PlayerPrefs.SetFloat(Constants.Prefs.LAST_POSITION_Y, transform.position.y);
         PlayerPrefs.SetInt(Constants.Prefs.LAST_ORIENTATION, (int)playerOrientation);
+        PlayerPrefs.SetInt(Constants.Prefs.FORCE_SLEEPING, isForceSleeping ? 1 : 0);
         PlayerPrefs.Save();
     }
 
