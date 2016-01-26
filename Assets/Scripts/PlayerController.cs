@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
                 playerOrientation = PlayerOrientation.Right;
             }
 
-            if (Input.GetButtonDown("Action") && interactiveObject != null)
+            if (Input.GetButtonDown("Action") && interactiveObject != null && !interacting)
             {
                 StartCoroutine(Interact());
             }
