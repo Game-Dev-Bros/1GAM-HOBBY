@@ -36,6 +36,8 @@ public class ClockManager : MonoBehaviour
             currentGameTime = PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME);
         }
 
+        use24hour = (PlayerPrefs.GetInt(Constants.Prefs.USE_24_HOUR_CLOCK, Constants.Prefs.Defaults.USE_24_HOUR_CLOCK)  == 1);
+
         maxGameTime = (long)(DayOfWeek.Friday + 1) * 24 * 60 * 60 - 1; // 11:59pm @ Friday
     }
 
