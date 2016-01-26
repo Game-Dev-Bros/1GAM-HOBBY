@@ -3401,7 +3401,7 @@ MonoBehaviour:
     text: 
     tag: SLEEP_NIGHT
     duration: 480
-    statModifier: 0
+    statModifier: -40
 --- !u!61 &187401837
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4881,7 +4881,7 @@ MonoBehaviour:
     text: Watch a movie
     tag: WATCH_MOVIE
     duration: 120
-    statModifier: 0
+    statModifier: -25
 --- !u!61 &285126791
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5371,7 +5371,7 @@ MonoBehaviour:
     text: Watch a movie
     tag: WATCH_MOVIE
     duration: 120
-    statModifier: 0
+    statModifier: -25
 --- !u!61 &303275381
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14359,7 +14359,7 @@ MonoBehaviour:
     text: Eat a meal
     tag: EAT_MEAL
     duration: 30
-    statModifier: 0
+    statModifier: -15
 --- !u!61 &868450457
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17561,7 +17561,7 @@ MonoBehaviour:
     text: Eat a snack
     tag: EAT_SNACK
     duration: 15
-    statModifier: 0
+    statModifier: -5
 --- !u!61 &1001084920
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24979,7 +24979,7 @@ MonoBehaviour:
     text: Use the bathroom
     tag: USE_BATHROOM
     duration: 15
-    statModifier: 0
+    statModifier: -5
 --- !u!61 &1378486443
 BoxCollider2D:
   m_ObjectHideFlags: 0

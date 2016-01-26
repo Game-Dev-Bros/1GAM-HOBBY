@@ -21710,13 +21710,13 @@ MonoBehaviour:
     text: Sleep for the night
     tag: SLEEP_NIGHT
     duration: 480
-    statModifier: 0
+    statModifier: -40
   - interactable: 1
     active: 0
     text: Take a nap
     tag: TAKE_NAP
-    duration: 90
-    statModifier: 0
+    duration: 120
+    statModifier: -25
 --- !u!61 &1036902384
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24582,7 +24582,7 @@ MonoBehaviour:
     text: Write my thesis
     tag: WRITE_THESIS
     duration: 150
-    statModifier: 0
+    statModifier: 40
   - interactable: 1
     active: 0
     text: Submit my thesis
@@ -36633,7 +36633,7 @@ MonoBehaviour:
     text: Use the bathroom
     tag: USE_BATHROOM
     duration: 15
-    statModifier: 0
+    statModifier: -5
 --- !u!61 &1705067932
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -42803,7 +42803,7 @@ MonoBehaviour:
     active: 1
     text: Read letter
     tag: READ_LETTER
-    duration: 150
+    duration: 0
     statModifier: 0
 --- !u!61 &2042203627
 BoxCollider2D:
