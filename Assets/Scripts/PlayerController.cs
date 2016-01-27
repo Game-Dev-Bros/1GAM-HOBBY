@@ -36,11 +36,13 @@ public class PlayerController : MonoBehaviour
     private SliderController pointer;
     private ScreenFader screenFader;
     private GameManager gameManager;
+    private DayCounterScript daysRemaining;
 
     private bool isForceSleeping;
 
     void Awake()
     {
+        daysRemaining = GameObject.Find("RemainingDays").GetComponent<DayCounterScript>();
         eventSystem = GameObject.Find("EventSystem");
         mplayer = GameObject.Find("PersistentDataObject").GetComponent<MusicPlayer>();
         clock = GameObject.Find("Clock").GetComponent<ClockManager>();
@@ -49,7 +51,8 @@ public class PlayerController : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         dialogController.gameObject.SetActive(true);
         playerOrientation = PlayerOrientation.Down;
-        
+        screenFader = GameObject.Find("Fader").GetComponent<ScreenFader>();
+
         isForceSleeping = (PlayerPrefs.GetInt(Constants.Prefs.FORCE_SLEEPING, Constants.Prefs.Defaults.FORCE_SLEEPING) == 1);
 
         bool hasSavedGame = (PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME, Constants.Prefs.Defaults.GAME_TIME) > 0);
@@ -61,6 +64,7 @@ public class PlayerController : MonoBehaviour
         bool hasChangedFloor = PlayerPrefs.GetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR) == 1;
         if(isForceSleeping)
         {
+            daysRemaining.ShowRemainingDays();
             isForceSleeping = false;
             PlayerPrefs.SetInt(Constants.Prefs.FORCE_SLEEPING, Constants.Prefs.Defaults.FORCE_SLEEPING);
             SavePlayerData();
@@ -76,7 +80,7 @@ public class PlayerController : MonoBehaviour
             SavePlayerData();
         }
 
-        screenFader = GameObject.Find("Fader").GetComponent<ScreenFader>();
+
 
         animator.SetBool("up", playerOrientation == PlayerOrientation.Up);
         animator.SetBool("down", playerOrientation == PlayerOrientation.Down);
@@ -165,6 +169,25 @@ public class PlayerController : MonoBehaviour
 
                 dialogController.background.rectTransform.sizeDelta += new Vector2(200, 200);
                 dialogController.dialogText.rectTransform.sizeDelta += new Vector2(200, 200);
+            }
+            else if(action.tag == Constants.Actions.SLEEP_NIGHT)
+            {
+                if (gameManager.CanExecuteAction(action))
+                {
+                    yield return screenFader.FadeToColor(Constants.Colors.FADE, 0.25f);
+                    UpdateStats(action);
+                    daysRemaining.ShowRemainingDays();
+                }
+                else
+                {
+                    interacting = false;
+                    dialogController.currentAction = null;
+
+                    lastActionInteractable = action.interactable;
+                    lastActionText = action.text;
+                    action.interactable = false;
+                    action.text = Constants.Strings.WAIT_MESSAGE;
+                }
             }
             else
             {

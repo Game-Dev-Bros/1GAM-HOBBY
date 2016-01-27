@@ -21,7 +21,8 @@ public class DayCounterScript : MonoBehaviour {
     public void ShowRemainingDays()
     {
         daysText.text = "Days remaining: " + clock.GetRemainingDays().ToString();
-       
+        fadeImage.enabled = true;
+        StopAllCoroutines();
         StartCoroutine(FadeAndShowDays());
     }
 
@@ -35,7 +36,7 @@ public class DayCounterScript : MonoBehaviour {
         yield return StartCoroutine(FadeInDays(1));
         yield return new WaitForSeconds(1);
         StartCoroutine(FadeOutDays(0.5f));
-        yield return StartCoroutine(screenFader.FadeToColor(Color.clear, 0.5f));
+        StartCoroutine(screenFader.FadeToColor(Color.clear, 0.5f));
         clock.Resume();
     }
 

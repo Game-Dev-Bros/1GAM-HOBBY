@@ -15,7 +15,10 @@ public class ScreenFader : MonoBehaviour
         fadeImage.rectTransform.localScale = new Vector2(Screen.width, Screen.height);
         fadeImage.enabled = true;
         fadeImage.color = Color.black;
-        StartCoroutine(FadeToColor(Color.clear, fadeTime));
+        var isForceSleeping = (PlayerPrefs.GetInt(Constants.Prefs.FORCE_SLEEPING, Constants.Prefs.Defaults.FORCE_SLEEPING) == 1);
+
+        if (!isForceSleeping) //|| PlayerPrefs.GetString(Constants.Prefs.LAST_ACTIVITIES) != Constants.Actions.SLEEP_NIGHT
+            StartCoroutine(FadeToColor(Color.clear, fadeTime));
     }
 
     public IEnumerator FadeToColor(Color endColor, float fadeTime, int steps = 60)
