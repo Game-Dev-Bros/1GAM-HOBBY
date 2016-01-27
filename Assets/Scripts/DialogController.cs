@@ -45,7 +45,7 @@ public class DialogController : MonoBehaviour
             for(int i = 0; i < action.text.Length && isVisible; i++)
             {
                 dialogText.text += action.text[i];
-                yield return new WaitForSeconds(0.066f);
+                yield return new WaitForSeconds(0.05f);
             }
         }
     }

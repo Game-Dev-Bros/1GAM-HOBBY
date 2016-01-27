@@ -153,6 +153,19 @@ public class PlayerController : MonoBehaviour
             {
                 yield return GameObject.FindObjectOfType<GameManager>().EndGame(true);
             }
+            else if(action.tag == Constants.Actions.READ_LETTER)
+            {
+                interacting = false;
+                action.active = false;
+
+                Action letterAction = gameManager.GetActionWithTag(Constants.Actions.OPENED_LETTER);
+                letterAction.text = Constants.Strings.LETTER_MESSAGE;
+                letterAction.active = true;
+                interactiveObject = null;
+
+                dialogController.background.rectTransform.sizeDelta += new Vector2(200, 200);
+                dialogController.dialogText.rectTransform.sizeDelta += new Vector2(200, 200);
+            }
             else
             {
                 yield return screenFader.FadeToColor(Constants.Colors.FADE, 0.25f);
@@ -160,7 +173,6 @@ public class PlayerController : MonoBehaviour
                 clock.AddMinutes(action.duration);
                 yield return screenFader.FadeToColor(Color.clear, 0.25f);
             }
-
         }
 
         interacting = false;
@@ -231,7 +243,11 @@ public class PlayerController : MonoBehaviour
 
             interactiveObject = null;
             interacting = false;
-            dialogController.Hide();
+        }
+
+        if(interactiveObject == null)
+        {
+            OnLeavingAction();
         }
 
         if(currentStairs != null)
@@ -262,6 +278,27 @@ public class PlayerController : MonoBehaviour
 
         transform.position += walkingDirection * (walking ? 1 : 0) * walkingSpeed * Time.deltaTime;
         GetComponent<SpriteRenderer>().sortingOrder = (currentStairs != null) ? currentStairs.playerZOrder : (int)-transform.position.y - 1;
+    }
+
+    void OnLeavingAction()
+    {
+        Action action = dialogController.currentAction;
+        dialogController.Hide();
+
+        if(action == null)
+        {
+            return;
+        }
+
+        if(action.tag == Constants.Actions.OPENED_LETTER)
+        {
+            dialogController.background.rectTransform.sizeDelta -= new Vector2(200, 200);
+            dialogController.dialogText.rectTransform.sizeDelta -= new Vector2(200, 200);
+            
+            Action letterAction = gameManager.GetActionWithTag(Constants.Actions.READ_LETTER);
+            action.active = false;
+            letterAction.active = true;
+        }
     }
 
     IEnumerator CheckSleep()

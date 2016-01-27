@@ -95,6 +95,8 @@ public static class Constants
         public const string WATCH_MOVIE = "WATCH_MOVIE";
         public const string EAT_MEAL = "EAT_MEAL";
         public const string EAT_SNACK = "EAT_SNACK";
+        public const string READ_LETTER = "READ_LETTER";
+        public const string OPENED_LETTER = "OPENED_LETTER";
 
         public static string[] values = new string[]
         {
@@ -107,7 +109,9 @@ public static class Constants
             PARENTS_BEDROOM,
             WATCH_MOVIE,
             EAT_MEAL,
-            EAT_SNACK
+            EAT_SNACK,
+            READ_LETTER,
+            OPENED_LETTER
         };
     }
 
@@ -115,10 +119,22 @@ public static class Constants
     {
         public static Color FADE = new Color(.09f, .09f, .09f);
     }
-
+    
     public static class Game
     {
         public static string PERSISTENT_OBJECT = "PersistentDataObject";
         public static string FADER_OBJECT = "Fader";
+    }
+
+    public static class Strings
+    {
+        public static string LETTER_MESSAGE = 
+            "Hi sweetie, your father and I had to go visit grandma for this week. " +
+            "We know you have been super busy finishing your thesis, but don't forget " +
+            "to eat properly and try to have some fun too.\n" +
+            "But, more importantly, don't forget to submit it!\n" + 
+            "\n"+
+            "Love,\n" + 
+            "Mom";
     }
 }
