@@ -23,7 +23,8 @@ public class CreditsScript : MonoBehaviour {
         grade = GameObject.Find("Grade").GetComponent<Text>();
 
         float playerStatus = PlayerPrefs.GetFloat(Constants.Prefs.PLAYER_STATUS, 0);
-        float playerGrade = Mathf.Abs(100 - (50 - playerStatus) * 2);
+        float offset = Mathf.Abs(playerStatus-50);
+        float playerGrade = 100 - (offset * 2);//Mathf.Abs(100 - (50 - playerStatus) * 2);
 
         grade.text = "[" + LetterGradeFromNumber(playerGrade) + "]";
 
