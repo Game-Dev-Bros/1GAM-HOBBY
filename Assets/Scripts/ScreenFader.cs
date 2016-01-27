@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class ScreenFader : MonoBehaviour
 {
-    public Image fadeImage;
+    private Image fadeImage;
     public float fadeTime = 1.5f;
     public bool isRunning = false;
 
     void Awake()
     {
+        fadeImage = GameObject.Find("FadeImage").GetComponent<Image>();
         fadeImage.rectTransform.localScale = new Vector2(Screen.width, Screen.height);
         fadeImage.enabled = true;
         fadeImage.color = Color.black;
