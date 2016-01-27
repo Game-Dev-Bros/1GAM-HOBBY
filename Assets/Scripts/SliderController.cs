@@ -2,7 +2,7 @@
 
 public class SliderController : MonoBehaviour
 {
-    public GameObject pointer;
+    private GameObject pointer;
     public float moveSpeed;
     public float minValue, maxValue;
     public float minAngle, maxAngle;
@@ -12,6 +12,7 @@ public class SliderController : MonoBehaviour
     void Awake()
     {
         value = PlayerPrefs.GetFloat("Pointer");
+        pointer = GameObject.Find("Pointer");
         UpdateSlider(value);
     }
 
