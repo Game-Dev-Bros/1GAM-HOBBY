@@ -124,7 +124,7 @@ public class ClockManager : MonoBehaviour
 
     public int GetRemainingDays()
     {
-        return totalGameDays - GetDays((long)currentGameTime);
+        return GetDays((long)maxGameTime) - GetDays((long)currentGameTime);
     }
 
     public void GameOver()
