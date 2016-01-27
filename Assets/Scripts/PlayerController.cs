@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
             {
                 yield return screenFader.FadeToColor(Constants.Colors.FADE, 0.25f);
                 pointer.value += action.statModifier;
-                clock.AddMinutes(action.duration);
+                clock.AddMinutes((int) Random.Range(action.duration * .9f, action.duration * 1.1f));
                 yield return screenFader.FadeToColor(Color.clear, 0.25f);
             }
         }
