@@ -117,7 +117,10 @@ public class GameManager : MonoBehaviour
 
         if(lastTime == 0)
         {
-            return true;
+            if(action.tag != Constants.Actions.SLEEP_NIGHT && action.tag != Constants.Actions.TAKE_NAP)
+            {
+                return true;
+            }
         }
 
         int lastTimeInMinutes = clock.GetTotalMinutes((long) lastTime);
@@ -136,7 +139,7 @@ public class GameManager : MonoBehaviour
             case Constants.Actions.LOSE_TIME:
                 return minutesDiff > 60;
             case Constants.Actions.SLEEP_NIGHT:
-                return hour >= 23;
+                return hour >= 23 || hour < 3;
             case Constants.Actions.TAKE_NAP:
                 return hour >= 13 && minutesDiff > 8 * 60;
             case Constants.Actions.USE_BATHROOM:
