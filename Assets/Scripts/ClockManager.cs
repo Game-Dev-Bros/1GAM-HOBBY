@@ -132,4 +132,10 @@ public class ClockManager : MonoBehaviour
         isFinished = true;
         StartCoroutine(GameObject.FindObjectOfType<GameManager>().EndGame(false));
     }
+
+    public int GetTotalMinutes(long time)
+    {
+        return (int) (time / 60);
+    }
+
 }

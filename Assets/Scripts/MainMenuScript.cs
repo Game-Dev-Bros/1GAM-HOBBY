@@ -14,18 +14,23 @@ public class MainMenuScript : MonoBehaviour
         bool hasSavedGame = (PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME, Constants.Prefs.Defaults.GAME_TIME) > 0);
         continueButton.interactable = hasSavedGame;
         
-        AudioListener.volume = PlayerPrefs.GetFloat(Constants.Prefs.VOLUME, Constants.Prefs.Defaults.VOLUME);
+        use24HourClock.isOn = PlayerPrefs.GetInt(Constants.Prefs.USE_24_HOUR_CLOCK, Constants.Prefs.Defaults.USE_24_HOUR_CLOCK) == 1;
+        volume.value = PlayerPrefs.GetFloat(Constants.Prefs.VOLUME, Constants.Prefs.Defaults.VOLUME);
+        AudioListener.volume = volume.value;
 
         ShowMain();
     }
 
     private void ResetPlayerPrefs()
     {
+        PlayerPrefs.DeleteAll();
         PlayerPrefs.SetFloat(Constants.Prefs.GAME_TIME, Constants.Prefs.Defaults.GAME_TIME);
         PlayerPrefs.SetFloat(Constants.Prefs.PLAYER_STATUS, Constants.Prefs.Defaults.PLAYER_STATUS);
         PlayerPrefs.SetString(Constants.Prefs.LAST_ACTIVITIES, Constants.Prefs.Defaults.LAST_ACTIVITIES);
         PlayerPrefs.SetInt(Constants.Prefs.FORCE_SLEEPING, Constants.Prefs.Defaults.FORCE_SLEEPING);
         PlayerPrefs.SetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR);
+        PlayerPrefs.SetFloat(Constants.Prefs.VOLUME, volume.value);
+        PlayerPrefs.SetInt(Constants.Prefs.USE_24_HOUR_CLOCK, use24HourClock.isOn ? 1 : 0);
         PlayerPrefs.Save();
     }
 
@@ -52,9 +57,6 @@ public class MainMenuScript : MonoBehaviour
     {
         mainMenu.SetActive(false);
         optionsMenu.SetActive(true);
-
-        use24HourClock.isOn = PlayerPrefs.GetInt(Constants.Prefs.USE_24_HOUR_CLOCK, Constants.Prefs.Defaults.USE_24_HOUR_CLOCK) == 1;
-        volume.value = PlayerPrefs.GetFloat(Constants.Prefs.VOLUME, Constants.Prefs.Defaults.VOLUME);
     }
     
     public void Update24HourClock()

@@ -168,16 +168,35 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                yield return screenFader.FadeToColor(Constants.Colors.FADE, 0.25f);
-                pointer.value += action.statModifier;
-                clock.AddMinutes((int) Random.Range(action.duration * .9f, action.duration * 1.1f));
-                yield return screenFader.FadeToColor(Color.clear, 0.25f);
+                if(gameManager.CanExecuteAction(action))
+                {
+                    yield return screenFader.FadeToColor(Constants.Colors.FADE, 0.25f);
+                    UpdateStats(action);
+                    yield return screenFader.FadeToColor(Color.clear, 0.25f);
+                }
+                else
+                {
+                    interacting = false;
+                    dialogController.currentAction = null;
+
+                    lastActionInteractable = action.interactable;
+                    lastActionText = action.text;
+                    action.interactable = false;
+                    action.text = Constants.Strings.WAIT_MESSAGE;
+                }
             }
         }
 
         interacting = false;
 
         yield return null;
+    }
+
+    void UpdateStats(Action action)
+    {
+        pointer.value += action.statModifier;
+        clock.AddMinutes((int) Random.Range(action.duration * .9f, action.duration * 1.1f));
+        PlayerPrefs.SetFloat(action.tag, clock.currentGameTime);
     }
 
     void UpdatePlayer()
@@ -280,6 +299,9 @@ public class PlayerController : MonoBehaviour
         GetComponent<SpriteRenderer>().sortingOrder = (currentStairs != null) ? currentStairs.playerZOrder : (int)-transform.position.y - 1;
     }
 
+    bool lastActionInteractable;
+    string lastActionText;
+
     void OnLeavingAction()
     {
         Action action = dialogController.currentAction;
@@ -299,6 +321,11 @@ public class PlayerController : MonoBehaviour
             action.active = false;
             letterAction.active = true;
         }
+        else if(action.interactable == false)
+        {
+            action.interactable = lastActionInteractable;
+            action.text = lastActionText;
+        }
     }
 
     IEnumerator CheckSleep()
@@ -316,8 +343,7 @@ public class PlayerController : MonoBehaviour
 
                 yield return StartCoroutine(screenFader.FadeToColor(Constants.Colors.FADE, .5f));
                 Action action = gameManager.GetActionWithTag(Constants.Actions.SLEEP_NIGHT);
-                pointer.value += action.statModifier;
-                clock.AddMinutes(action.duration);
+                UpdateStats(action);
 
                 SavePlayerData();
 

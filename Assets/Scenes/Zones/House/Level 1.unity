@@ -21730,7 +21730,7 @@ MonoBehaviour:
   playerOrientation: 0
   actions:
   - interactable: 1
-    active: 0
+    active: 1
     text: Sleep for the night
     tag: SLEEP_NIGHT
     duration: 480

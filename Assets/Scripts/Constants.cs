@@ -136,5 +136,7 @@ public static class Constants
             "\n"+
             "Love,\n" + 
             "Mom";
+
+        public static string WAIT_MESSAGE = "I should wait a little longer.";
     }
 }
