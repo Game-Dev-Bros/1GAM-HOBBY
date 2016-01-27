@@ -30,7 +30,7 @@ public class MainMenuScript : MonoBehaviour
     IEnumerator PlayAnimation()
     {
         title.transform.localScale = Vector3.one * minScale;
-        mainMenu.SetActive(false);
+        mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
         yield return StartCoroutine(FadeInTitle(1));
         StartCoroutine(ScaleTitleUp(scaleDuration));

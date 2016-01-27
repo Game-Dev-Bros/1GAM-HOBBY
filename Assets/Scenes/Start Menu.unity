@@ -2106,6 +2106,9 @@ MonoBehaviour:
   continueButton: {fileID: 1599003431}
   use24HourClock: {fileID: 414468103}
   volume: {fileID: 749083462}
+  minScale: 0.97
+  maxScale: 1
+  scaleDuration: 1.5
 --- !u!1 &2111223168
 GameObject:
   m_ObjectHideFlags: 0
