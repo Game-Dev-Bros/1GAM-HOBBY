@@ -12,15 +12,17 @@ public class CreditsScript : MonoBehaviour {
     private MusicPlayer mplayer;
     public float shakeIntensity = 3;
     public float scrollDuration = 3;
+    private Image fadeImage;
 
     void Start ()
     {
         mplayer = GameObject.Find(Constants.Game.PERSISTENT_OBJECT).GetComponent<MusicPlayer>();
-        mplayer.SetMusicVolume(0.2f);
         content = GameObject.Find("Content");
         namesText = GameObject.Find("Names").GetComponent<Text>();
         creditsText = GetComponent<Text>();
         grade = GameObject.Find("Grade").GetComponent<Text>();
+        fadeImage = GameObject.Find("FadeImage").GetComponent<Image>();
+        fadeImage.color = Color.clear;
 
         float playerStatus = PlayerPrefs.GetFloat(Constants.Prefs.PLAYER_STATUS, 0);
         float offset = Mathf.Abs(playerStatus-50);
@@ -55,8 +57,7 @@ public class CreditsScript : MonoBehaviour {
         yield return StartCoroutine(ShakeScreen(0.2f, 20));
         yield return new WaitForSeconds(1);
         yield return StartCoroutine(FadeInNames(2));
-        yield return new WaitForSeconds(5);
-        yield return StartCoroutine(QuitToMainMenu());
+        yield return StartCoroutine(FadeToMainMenu(3));
     }
 
     IEnumerator RollCredits(float speed, int steps = 60)
@@ -114,8 +115,22 @@ public class CreditsScript : MonoBehaviour {
         }
     }
 
-    IEnumerator QuitToMainMenu()
+    IEnumerator FadeToMainMenu(float duration)
     {
+        Color startingColor = fadeImage.color;
+        float startingVolume = AudioListener.volume;
+        float time = 0;
+
+        float steps = 100;
+        for (int i = 0; i < steps; i++)
+        {
+            time += duration / steps;
+            fadeImage.color = Color.Lerp(startingColor, Constants.Colors.FADE, time/duration);
+            AudioListener.volume = Mathf.Lerp(startingVolume, 0, time / duration);
+            yield return new WaitForSeconds(duration/steps);
+        }
+
+        Destroy(GameObject.Find("PersistentDataObject"));
         SceneManager.LoadScene(Constants.Levels.START_MENU);
         yield return null;
     }

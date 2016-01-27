@@ -39,8 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7221edffeba98ed488b80ad3d7ff96ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeImage: {fileID: 0}
-  fadeTime: 1.5
+  fadeTime: 0
   isRunning: 0
 --- !u!1001 &100100000
 Prefab:
