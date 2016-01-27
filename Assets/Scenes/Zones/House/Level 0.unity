@@ -4874,12 +4874,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fbdafeb415f5a4fa2295d35d3e41bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerOrientation: 1
+  playerOrientation: 0
   actions:
   - interactable: 1
     active: 1
-    text: Watch a movie
-    tag: WATCH_MOVIE
+    text: Take a nap
+    tag: TAKE_NAP
     duration: 120
     statModifier: -25
 --- !u!61 &285126791

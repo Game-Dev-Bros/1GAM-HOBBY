@@ -21735,12 +21735,6 @@ MonoBehaviour:
     tag: SLEEP_NIGHT
     duration: 480
     statModifier: -40
-  - interactable: 1
-    active: 0
-    text: Take a nap
-    tag: TAKE_NAP
-    duration: 120
-    statModifier: -25
 --- !u!61 &1036902384
 BoxCollider2D:
   m_ObjectHideFlags: 0
