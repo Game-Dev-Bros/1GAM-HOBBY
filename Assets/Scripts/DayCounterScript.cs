@@ -17,10 +17,25 @@ public class DayCounterScript : MonoBehaviour {
         clock = GameObject.Find("Clock").GetComponent<ClockManager>();
 	}
 	
-
     public void ShowRemainingDays()
     {
-        daysText.text = "Days remaining: " + clock.GetRemainingDays().ToString();
+        int remainingDays = clock.GetRemainingDays();
+
+        if(remainingDays > 0)
+        {
+            daysText.text = "Only " + remainingDays + " day";
+            if(remainingDays != 1)
+            {
+                daysText.text += "s";
+            }
+            daysText.text += " remaining. ";
+            daysText.text += "I can do this!";
+        }
+        else
+        {
+            daysText.text += "Last day! I can't forget to submit it by midnight.";
+        }
+
         fadeImage.enabled = true;
         StopAllCoroutines();
         StartCoroutine(FadeAndShowDays());
