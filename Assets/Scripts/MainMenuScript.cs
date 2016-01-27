@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -8,17 +9,75 @@ public class MainMenuScript : MonoBehaviour
     public Button continueButton;
     public Toggle use24HourClock;
     public Slider volume;
+    private Image title;
+    public float minScale = 0.95f;
+    public float maxScale = 1.05f;
+    public float scaleDuration = 4f;
 
     void Awake()
     {
         bool hasSavedGame = (PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME, Constants.Prefs.Defaults.GAME_TIME) > 0);
         continueButton.interactable = hasSavedGame;
-        
+
+        title = GameObject.Find("Title").GetComponent<Image>();
         use24HourClock.isOn = PlayerPrefs.GetInt(Constants.Prefs.USE_24_HOUR_CLOCK, Constants.Prefs.Defaults.USE_24_HOUR_CLOCK) == 1;
         volume.value = PlayerPrefs.GetFloat(Constants.Prefs.VOLUME, Constants.Prefs.Defaults.VOLUME);
         AudioListener.volume = volume.value;
+        
+        StartCoroutine(PlayAnimation());
+    }
 
+    IEnumerator PlayAnimation()
+    {
+        title.transform.localScale = Vector3.one * minScale;
+        mainMenu.SetActive(false);
+        optionsMenu.SetActive(false);
+        yield return StartCoroutine(FadeInTitle(1));
+        StartCoroutine(ScaleTitleUp(scaleDuration));
         ShowMain();
+    }
+
+    IEnumerator ScaleTitleDown(float duration)
+    {
+        title.enabled = true;
+        float time = 0;
+        title.transform.localScale = Vector3.one * maxScale;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            title.transform.localScale = Vector3.one * Mathf.Lerp(maxScale, minScale, time / duration);
+            yield return new WaitForEndOfFrame();
+        }
+        title.transform.localScale = Vector3.one * minScale;
+        StartCoroutine(ScaleTitleUp(scaleDuration));
+    }
+
+    IEnumerator ScaleTitleUp(float duration)
+    {
+        title.enabled = true;
+        float time = 0;
+        title.transform.localScale = Vector3.one * minScale;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            title.transform.localScale = Vector3.one * Mathf.Lerp(minScale, maxScale, time / duration);
+            yield return new WaitForEndOfFrame();
+        }
+        title.transform.localScale = Vector3.one * maxScale;
+        StartCoroutine(ScaleTitleDown(scaleDuration));
+    }
+
+    IEnumerator FadeInTitle(float seconds, int steps = 60)
+    {
+        var c = title.color;
+        var step = 1f / steps;
+        var newA = 0f;
+        for (int i = 0; i < steps; i++)
+        {
+            newA += step;
+            title.color = new Color(c.r, c.g, c.b, newA);
+            yield return new WaitForSeconds(seconds / steps);
+        }
     }
 
     private void ResetPlayerPrefs()
