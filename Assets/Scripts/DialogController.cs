@@ -32,20 +32,24 @@ public class DialogController : MonoBehaviour
     IEnumerator WriteDialogText(Action action)
     {
         dialogText.text = "";
-        if(action.interactable)
-        {
-            dialogText.alignment = TextAnchor.UpperCenter;
-            dialogText.text = action.text;
-            yield return null;
-        }
-        else
-        {
-            dialogText.alignment = TextAnchor.UpperLeft;
 
-            for(int i = 0; i < action.text.Length && isVisible; i++)
+        if(action != null)
+        {
+            if(action.interactable)
             {
-                dialogText.text += action.text[i];
-                yield return new WaitForSeconds(0.025f);
+                dialogText.alignment = TextAnchor.UpperCenter;
+                dialogText.text = action.text;
+                yield return null;
+            }
+            else
+            {
+                dialogText.alignment = TextAnchor.UpperLeft;
+
+                for(int i = 0; i < action.text.Length && isVisible; i++)
+                {
+                    dialogText.text += action.text[i];
+                    yield return new WaitForSeconds(0.025f);
+                }
             }
         }
     }

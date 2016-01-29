@@ -183,43 +183,33 @@ public class PlayerController : MonoBehaviour
                 dialogController.background.rectTransform.sizeDelta += new Vector2(200, 200);
                 dialogController.dialogText.rectTransform.sizeDelta += new Vector2(200, 200);
             }
-            else if(action.tag == Constants.Actions.SLEEP_NIGHT)
-            {
-                if (gameManager.CanExecuteAction(action))
-                {
-                    yield return screenFader.FadeToColor(Constants.Colors.FADE, 0.25f);
-
-                    interactiveObject = null;
-                    dialogController.Hide();
-
-                    transform.position = startingPosition;
-                    playerOrientation = PlayerOrientation.Down;
-
-                    UpdatePlayerAnimation(playerOrientation, false);
-                    UpdateSpriteZOrder();
-                    UpdateStats(action);
-
-                    daysRemaining.ShowRemainingDays();
-                    StartCoroutine(DisplayDailyMessage());
-                }
-                else
-                {
-                    interacting = false;
-                    dialogController.currentAction = null;
-
-                    lastActionInteractable = action.interactable;
-                    lastActionText = action.text;
-                    action.interactable = false;
-                    action.text = Constants.Strings.WAIT_MESSAGE;
-                }
-            }
             else
             {
                 if(gameManager.CanExecuteAction(action))
                 {
-                    yield return screenFader.FadeToColor(Constants.Colors.FADE, 0.25f);
-                    UpdateStats(action);
-                    yield return screenFader.FadeToColor(Color.clear, 0.25f);
+                    if(action.tag == Constants.Actions.SLEEP_NIGHT)
+                    {
+                        yield return screenFader.FadeToColor(Constants.Colors.FADE, 0.25f);
+
+                        interactiveObject = null;
+                        dialogController.Hide();
+
+                        transform.position = startingPosition;
+                        playerOrientation = PlayerOrientation.Down;
+
+                        UpdatePlayerAnimation(playerOrientation, false);
+                        UpdateSpriteZOrder();
+                        UpdateStats(action);
+
+                        daysRemaining.ShowRemainingDays();
+                        StartCoroutine(DisplayDailyMessage());
+                    }
+                    else
+                    {
+                        yield return screenFader.FadeToColor(Constants.Colors.FADE, 0.25f);
+                        UpdateStats(action);
+                        yield return screenFader.FadeToColor(Color.clear, 0.25f);
+                    }
                 }
                 else
                 {
