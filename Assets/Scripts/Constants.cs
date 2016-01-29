@@ -97,6 +97,7 @@ public static class Constants
         public const string EAT_SNACK = "EAT_SNACK";
         public const string READ_LETTER = "READ_LETTER";
         public const string OPENED_LETTER = "OPENED_LETTER";
+        public const string DAILY_MESSAGE = "DAILY_MESSAGE";
 
         public static string[] values = new string[]
         {
@@ -111,7 +112,8 @@ public static class Constants
             EAT_MEAL,
             EAT_SNACK,
             READ_LETTER,
-            OPENED_LETTER
+            OPENED_LETTER,
+            DAILY_MESSAGE
         };
     }
 
@@ -138,5 +140,15 @@ public static class Constants
             "Mom";
 
         public static string WAIT_MESSAGE = "I should wait a little longer.";
+        
+        public static string[] DAILY_MOTIVATIONS = 
+        {
+            "I can do this!",
+            "Almost there!",
+            "Never give up!",
+            "Final push!"
+        };
+
+        public static string LAST_DAY_MESSAGE = "I can't forget to submit it by midnight!";
     }
 }

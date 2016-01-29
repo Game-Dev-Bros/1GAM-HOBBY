@@ -137,5 +137,4 @@ public class ClockManager : MonoBehaviour
     {
         return (int) (time / 60);
     }
-
 }

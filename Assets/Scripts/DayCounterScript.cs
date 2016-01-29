@@ -8,9 +8,10 @@ public class DayCounterScript : MonoBehaviour {
     private Text daysText;
     private Image fadeImage;
     private ClockManager clock;
+    public bool isRunning;
 
-	// Use this for initialization
-	void Awake () {
+	void Awake ()
+    {
         fadeImage = GameObject.Find("FadeImage").GetComponent<Image>();
         daysText = GetComponent<Text>();
         screenFader = GameObject.Find(Constants.Game.FADER_OBJECT).GetComponent<ScreenFader>();
@@ -53,31 +54,35 @@ public class DayCounterScript : MonoBehaviour {
         clock.Resume();
     }
 
-
     IEnumerator FadeInDays(float seconds, int steps = 60)
     {
-        var c = daysText.color;
-        var step = 1f / steps;
-        var newA = c.a;
+        isRunning = true;
+
+        Color color = daysText.color;
+        float step = 1f / steps;
+        float alpha = color.a;
+
         for (int i = 0; i < steps; i++)
         {
-            newA += step;
-            daysText.color = new Color(c.r, c.g, c.b, newA);
+            alpha += step;
+            daysText.color = new Color(color.r, color.g, color.b, alpha);
             yield return new WaitForSeconds(seconds / steps);
         }
     }
 
     IEnumerator FadeOutDays(float seconds, int steps = 60)
     {
-        var c = daysText.color;
-        var step = 1f / steps;
-        var newA = c.a;
+        Color color = daysText.color;
+        float step = 1f / steps;
+        float alpha = color.a;
+
         for (int i = 0; i < steps; i++)
         {
-            newA -= step;
-            daysText.color = new Color(c.r, c.g, c.b, newA);
+            alpha -= step;
+            daysText.color = new Color(color.r, color.g, color.b, alpha);
             yield return new WaitForSeconds(seconds / steps);
         }
-    }
 
+        isRunning = false;
+    }
 }

@@ -1,5 +1,6 @@
 ﻿#if UNITY_EDITOR
 using System.Collections;
+using System.Collections.Generic;
 using UnityEditor;
 #endif
 using UnityEngine;
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour
     public bool interacting;
 
     public DialogController dialogController;
+
+    private Vector3 startingPosition;
 
     public enum PlayerOrientation
     {
@@ -39,9 +42,14 @@ public class PlayerController : MonoBehaviour
     private DayCounterScript daysRemaining;
 
     private bool isForceSleeping;
+    
+    private bool lastActionInteractable;
+    private string lastActionText;
 
     void Awake()
     {
+        startingPosition = transform.position;
+
         daysRemaining = GameObject.Find("RemainingDays").GetComponent<DayCounterScript>();
         eventSystem = GameObject.Find("EventSystem");
         mplayer = GameObject.Find("PersistentDataObject").GetComponent<MusicPlayer>();
@@ -64,7 +72,9 @@ public class PlayerController : MonoBehaviour
         bool hasChangedFloor = PlayerPrefs.GetInt(Constants.Prefs.CHANGING_FLOOR, Constants.Prefs.Defaults.CHANGING_FLOOR) == 1;
         if(isForceSleeping)
         {
+            gameManager.Reset();
             daysRemaining.ShowRemainingDays();
+            StartCoroutine(DisplayDailyMessage());
             isForceSleeping = false;
             PlayerPrefs.SetInt(Constants.Prefs.FORCE_SLEEPING, Constants.Prefs.Defaults.FORCE_SLEEPING);
             SavePlayerData();
@@ -80,11 +90,16 @@ public class PlayerController : MonoBehaviour
             SavePlayerData();
         }
 
+        UpdatePlayerAnimation(playerOrientation, false);
+    }
+
+    private void UpdatePlayerAnimation(PlayerOrientation playerOrientation, bool walking)
+    {
         animator.SetBool("up", playerOrientation == PlayerOrientation.Up);
         animator.SetBool("down", playerOrientation == PlayerOrientation.Down);
         animator.SetBool("left", playerOrientation == PlayerOrientation.Left);
         animator.SetBool("right", playerOrientation == PlayerOrientation.Right);
-        animator.SetBool("walking", false);
+        animator.SetBool("walking", walking);
     }
 
     void Update()
@@ -133,7 +148,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Pause"))
+        if (Input.GetButtonDown("Pause") && !screenFader.isRunning)
         {
             TogglePause();
         }
@@ -173,8 +188,19 @@ public class PlayerController : MonoBehaviour
                 if (gameManager.CanExecuteAction(action))
                 {
                     yield return screenFader.FadeToColor(Constants.Colors.FADE, 0.25f);
+
+                    interactiveObject = null;
+                    dialogController.Hide();
+
+                    transform.position = startingPosition;
+                    playerOrientation = PlayerOrientation.Down;
+
+                    UpdatePlayerAnimation(playerOrientation, false);
+                    UpdateSpriteZOrder();
                     UpdateStats(action);
+
                     daysRemaining.ShowRemainingDays();
+                    StartCoroutine(DisplayDailyMessage());
                 }
                 else
                 {
@@ -220,9 +246,42 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetFloat(action.tag, clock.currentGameTime);
     }
 
+    IEnumerator DisplayDailyMessage()
+    {
+        Action sleepAction = gameManager.GetActionWithTag(Constants.Actions.SLEEP_NIGHT);
+        sleepAction.active = false
+            ;
+        yield return new WaitForSeconds(3.5f);
+
+        string message = "";
+        if(clock.GetRemainingDays() == 0)
+        {
+            message = Constants.Strings.LAST_DAY_MESSAGE;
+        }
+        else
+        {
+            message = Constants.Strings.DAILY_MOTIVATIONS[Random.Range(0, Constants.Strings.DAILY_MOTIVATIONS.Length)];
+        }
+
+        Action dailyAction = gameManager.GetActionWithTag(Constants.Actions.DAILY_MESSAGE);
+
+        dailyAction.active = true;
+        dailyAction.text = message;
+        dialogController.background.rectTransform.sizeDelta += new Vector2(50, 20);
+        dialogController.dialogText.rectTransform.sizeDelta += new Vector2(50, 20);
+
+        yield return new WaitForSeconds(2.5f);
+        dailyAction.active = false;
+        dailyAction.text = "";
+        dialogController.background.rectTransform.sizeDelta -= new Vector2(50, 20);
+        dialogController.dialogText.rectTransform.sizeDelta -= new Vector2(50, 20);
+
+        sleepAction.active = true;
+    }
+
     void UpdatePlayer()
     {
-        if (screenFader.isRunning || isForceSleeping)
+        if (screenFader.isRunning || daysRemaining.isRunning || isForceSleeping)
         {
             return;
         }
@@ -265,6 +324,23 @@ public class PlayerController : MonoBehaviour
             dialogController.Hide();
         }
 
+        if(interactiveObject != null)
+        {
+            for(int i = 0; i < interactionColliders.Length; i++)
+            {
+                Collider2D interactionCollider = interactionColliders[i];
+
+                // Give highest priority to the same task from the previous frame
+                if(interactiveObject == interactionCollider.gameObject)
+                {
+                    Collider2D temp = interactionColliders[0];
+                    interactionColliders[0] = interactionCollider;
+                    interactionColliders[i] = temp;
+                    break;
+                }
+            }
+        }
+
         foreach(Collider2D interactionCollider in interactionColliders)
         {
             if(interactionCollider.tag == "Interactive")
@@ -305,11 +381,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        animator.SetBool("up", playerOrientation == PlayerOrientation.Up);
-        animator.SetBool("down", playerOrientation == PlayerOrientation.Down);
-        animator.SetBool("left", playerOrientation == PlayerOrientation.Left);
-        animator.SetBool("right", playerOrientation == PlayerOrientation.Right);
-        animator.SetBool("walking", walking);
+        UpdateSpriteZOrder();
+
+        UpdatePlayerAnimation(playerOrientation, walking);
 
         if (walking)
         {
@@ -317,11 +391,12 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.position += walkingDirection * (walking ? 1 : 0) * walkingSpeed * Time.deltaTime;
-        GetComponent<SpriteRenderer>().sortingOrder = (currentStairs != null) ? currentStairs.playerZOrder : (int)-transform.position.y - 1;
     }
 
-    bool lastActionInteractable;
-    string lastActionText;
+    void UpdateSpriteZOrder()
+    {
+        GetComponent<SpriteRenderer>().sortingOrder = (currentStairs != null) ? currentStairs.playerZOrder : (int)-transform.position.y - 1;
+    }
 
     void OnLeavingAction()
     {
@@ -358,7 +433,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             int hour = clock.GetHours((long) clock.currentGameTime);
-            if(hour >= 3 && hour < 8 && !isForceSleeping)
+            if(hour >= 3 && hour < 6 && !isForceSleeping)
             {
                 isForceSleeping = true;
 
@@ -370,12 +445,8 @@ public class PlayerController : MonoBehaviour
 
                 playerOrientation = PlayerOrientation.Down;
                 walking = false;
-
-                animator.SetBool("up", playerOrientation == PlayerOrientation.Up);
-                animator.SetBool("down", playerOrientation == PlayerOrientation.Down);
-                animator.SetBool("left", playerOrientation == PlayerOrientation.Left);
-                animator.SetBool("right", playerOrientation == PlayerOrientation.Right);
-                animator.SetBool("walking", walking);
+                
+                UpdatePlayerAnimation(playerOrientation, walking);
 
                 SceneManager.LoadScene(Constants.Levels.LEVEL_1);
                 isForceSleeping = false;
@@ -432,7 +503,6 @@ public class PlayerController : MonoBehaviour
 
     public void LoadPlayerData()
     {
-
         clock.use24hour = PlayerPrefs.GetInt(Constants.Prefs.USE_24_HOUR_CLOCK, Constants.Prefs.Defaults.USE_24_HOUR_CLOCK) == 1;
         clock.currentGameTime = PlayerPrefs.GetFloat(Constants.Prefs.GAME_TIME, Constants.Prefs.Defaults.GAME_TIME);
         pointer.value = PlayerPrefs.GetFloat(Constants.Prefs.PLAYER_STATUS, Constants.Prefs.Defaults.PLAYER_STATUS);
@@ -446,12 +516,8 @@ public class PlayerController : MonoBehaviour
 
             playerOrientation = (PlayerOrientation) PlayerPrefs.GetInt(Constants.Prefs.LAST_ORIENTATION, Constants.Prefs.Defaults.LAST_ORIENTATION);
         }
-
-        animator.SetBool("up", playerOrientation == PlayerOrientation.Up);
-        animator.SetBool("down", playerOrientation == PlayerOrientation.Down);
-        animator.SetBool("left", playerOrientation == PlayerOrientation.Left);
-        animator.SetBool("right", playerOrientation == PlayerOrientation.Right);
-        animator.SetBool("walking", false);
+        
+        UpdatePlayerAnimation(playerOrientation, false);
     }
 
     public void SavePlayerData()
