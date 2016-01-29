@@ -36,7 +36,7 @@ public static class Constants
             public const float VOLUME = 1;
 
             public const int CHANGING_FLOOR = 0;
-            public const int FORCE_SLEEPING = 0;
+            public const int FORCE_SLEEPING = 1;
 
             public const int GAME_TIME = 0;
             public const float PLAYER_STATUS = 45;

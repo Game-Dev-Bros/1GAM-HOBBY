@@ -80,8 +80,6 @@ public class PlayerController : MonoBehaviour
             SavePlayerData();
         }
 
-
-
         animator.SetBool("up", playerOrientation == PlayerOrientation.Up);
         animator.SetBool("down", playerOrientation == PlayerOrientation.Down);
         animator.SetBool("left", playerOrientation == PlayerOrientation.Left);
