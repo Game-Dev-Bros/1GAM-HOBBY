@@ -33,7 +33,7 @@ public class DayCounterScript : MonoBehaviour {
         }
         else
         {
-            daysText.text += "Last day! I can't forget to submit it by midnight.";
+            daysText.text = "Last day! I can't forget to submit it by midnight.";
         }
 
         fadeImage.enabled = true;
