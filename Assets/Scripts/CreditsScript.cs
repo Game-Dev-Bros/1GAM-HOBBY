@@ -46,6 +46,9 @@ public class CreditsScript : MonoBehaviour
 
         namesText.text = Constants.Credits.CREDITS_STRING;
 
+        PlayerPrefs.SetFloat(Constants.Prefs.GAME_TIME, Constants.Prefs.Defaults.GAME_TIME);
+        PlayerPrefs.Save();
+
         StartCoroutine(Play());
 	}
 
