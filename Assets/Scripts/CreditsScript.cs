@@ -3,8 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class CreditsScript : MonoBehaviour {
-
+public class CreditsScript : MonoBehaviour
+{
     private Text creditsText;
     private Text namesText;
     private GameObject content;
@@ -25,8 +25,8 @@ public class CreditsScript : MonoBehaviour {
         fadeImage.color = Color.clear;
 
         float playerStatus = PlayerPrefs.GetFloat(Constants.Prefs.PLAYER_STATUS, 0);
-        float offset = Mathf.Abs(playerStatus-50);
-        float playerGrade = 100 - (offset * 2);//Mathf.Abs(100 - (50 - playerStatus) * 2);
+        float offset = Mathf.Abs(playerStatus - 50);
+        float playerGrade = 100 - (offset * 2);
 
         grade.text = "[" + LetterGradeFromNumber(playerGrade) + "]";
 
@@ -137,11 +137,11 @@ public class CreditsScript : MonoBehaviour {
 
     private string LetterGradeFromNumber(float numberGrade) 
     {
-	    if(numberGrade >= 95) 
+	    if(numberGrade >= 98) 
 	    {
 		    return "A+";
 	    }
-	    if(numberGrade >= 93) 
+	    if(numberGrade >= 95) 
 	    {
 		    return "A";
 	    }
@@ -149,39 +149,39 @@ public class CreditsScript : MonoBehaviour {
 	    {
 		    return "A-";
 	    }
-	    if(numberGrade >= 87) 
+	    if(numberGrade >= 85) 
 	    {
 		    return "B+";
 	    }
-	    if(numberGrade >= 83) 
+	    if(numberGrade >= 80) 
 	    {
 		    return "B";
 	    }
-	    if(numberGrade >= 80) 
+	    if(numberGrade >= 75) 
 	    {
 		    return "B-";
 	    }
-	    if(numberGrade >= 77) 
+	    if(numberGrade >= 68) 
 	    {
 		    return "C+";
 	    }
-	    if(numberGrade >= 73) 
+	    if(numberGrade >= 59) 
 	    {
 		    return "C";
 	    }
-	    if(numberGrade >= 70) 
+	    if(numberGrade >= 49) 
 	    {
 		    return "C-";
 	    }
-	    if(numberGrade >= 67) 
+	    if(numberGrade >= 38) 
 	    {
 		    return "D+";
 	    }
-	    if(numberGrade >= 63) 
+	    if(numberGrade >= 26) 
 	    {
 		    return "D";
 	    }
-	    if(numberGrade >= 60) 
+	    if(numberGrade >= 12) 
 	    {
 		    return "D-";
 	    }
