@@ -79,7 +79,7 @@ public static class Constants
         public const string CREDITS_STRING = 
             "Made for 1GAM by:\n" + 
             PETE1 + "              " + PETE2 + "\n" +
-            "@kaotic4567" + "               " + "@pmhpereira ";
+            "@ordepsacul" + "               " + "@pmhpereira  ";
     }
 
     public static class Actions
